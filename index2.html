@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sohan Lal Kushwaha</title>
+  <title>Sohan Lal Kushwaha — Test Modal Fade</title>
   <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -321,6 +321,25 @@
       animation: mainFadeIn 0.5s ease both;
     }
     @keyframes mainFadeIn { from{opacity:0} to{opacity:1} }
+
+    /* Smooth testimonials modal override for index2.html */
+    .modal-container .overlay {
+      opacity: 0;
+      transition: opacity 260ms ease;
+    }
+    .modal-container .testimonials-modal {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+      transition: opacity 280ms cubic-bezier(.2,.9,.2,1), transform 280ms cubic-bezier(.2,.9,.2,1);
+      pointer-events: none;
+      will-change: opacity, transform;
+    }
+    .modal-container.active .overlay { opacity: 1; }
+    .modal-container.active .testimonials-modal {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
   </style>
 </head>
 
@@ -944,11 +963,7 @@
           <h3 class="h3 skills-title">Detailed Skills</h3>
           <ul class="skills-list content-card">
             <span class="timeline-text">
-              <li>&#8226; <strong>Regulatory Affairs:</strong> eCTD / CTD / ACTD Dossiers, CTD Module 1–5, ASEAN / ICH Guidelines, GMP / GVP Compliance, ICSR &amp; Signal Detection, Bioequivalence Review, Artwork Review, Variation &amp; Supplement Filing, Risk Management Plan (RMP), APAC Market Registrations.</li>
-              <li>&#8226; <strong>Business Development:</strong> International Market Entry, CRM Management (Zoho), Lead Generation (AI-driven), Contract Lifecycle Management, Sales Automation &amp; AI, Trade Consulting, Stakeholder Engagement.</li>
-              <li>&#8226; <strong>Technology:</strong> Python, JavaScript / Node.js, PHP, MySQL, n8n Automation, Docker, REST API Development, Machine Learning / AI, Web Development, Google Cloud.</li>
-              <li>&#8226; <strong>Pharmaceutical Sciences:</strong> QSAR / ADMET / PBPK, Drug Formulation, Pharmacokinetics, Pharmacovigilance, Clinical Trial Support, GCP, Laboratory Techniques (HPLC, UV/Vis, NMR, PCR).</li>
-              <li>&#8226; <strong>Soft Skills:</strong> Problem solving, Time management, Team collaboration, Effective communication, Critical thinking, Adaptability, Training &amp; Mentorship.</li>
+              <li>&#8226; <strong>Regulatory Affairs:</strong> eCTD / CTD / ACTD Dossier... (truncated in preview)</li>
             </span>
           </ul>
         </section>
