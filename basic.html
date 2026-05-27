@@ -21,14 +21,21 @@
       transform: translateY(28px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .anim-fadeup.visible { opacity: 1; transform: translateY(0); }
+
+    .anim-fadeup.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* Fade-in */
     .anim-fadein {
       opacity: 0;
       transition: opacity 0.7s ease;
     }
-    .anim-fadein.visible { opacity: 1; }
+
+    .anim-fadein.visible {
+      opacity: 1;
+    }
 
     /* Slide from left */
     .anim-left {
@@ -36,21 +43,42 @@
       transform: translateX(-24px);
       transition: opacity 0.55s ease, transform 0.55s ease;
     }
-    .anim-left.visible { opacity: 1; transform: translateX(0); }
+
+    .anim-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
     /* Stagger delays */
-    .delay-1 { transition-delay: 0.1s !important; }
-    .delay-2 { transition-delay: 0.2s !important; }
-    .delay-3 { transition-delay: 0.3s !important; }
-    .delay-4 { transition-delay: 0.4s !important; }
-    .delay-5 { transition-delay: 0.5s !important; }
+    .delay-1 {
+      transition-delay: 0.1s !important;
+    }
+
+    .delay-2 {
+      transition-delay: 0.2s !important;
+    }
+
+    .delay-3 {
+      transition-delay: 0.3s !important;
+    }
+
+    .delay-4 {
+      transition-delay: 0.4s !important;
+    }
+
+    .delay-5 {
+      transition-delay: 0.5s !important;
+    }
 
     /* Skill bar — start at 0, animate to value */
     .skill-progress-fill {
       width: 0 !important;
       transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
-    .skill-progress-fill.animated { width: var(--target-width) !important; }
+
+    .skill-progress-fill.animated {
+      width: var(--target-width) !important;
+    }
 
     /* Timeline items */
     .timeline-item {
@@ -58,16 +86,21 @@
       transform: translateX(-20px);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
 
     /* Hover lift on content cards */
     .content-card {
       transition: transform 0.25s ease, box-shadow 0.25s ease !important;
       will-change: transform, opacity;
     }
+
     .content-card:hover {
       transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.25) !important;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25) !important;
     }
 
     /* Hover lift on blog posts */
@@ -75,24 +108,38 @@
       transition: transform 0.25s ease !important;
       display: block;
     }
-    .blog-post-item:hover a { transform: translateY(-3px); }
+
+    .blog-post-item:hover a {
+      transform: translateY(-3px);
+    }
 
     /* Sidebar avatar pulse ring */
     .avatar-box {
       position: relative;
     }
+
     .avatar-box::after {
       content: '';
       position: absolute;
       inset: -4px;
-      border-radius: 50%;
+      border-radius: inherit;
       border: 2px solid hsl(45, 100%, 72%);
       opacity: 0;
       animation: avatarRing 3s ease-in-out infinite;
     }
+
     @keyframes avatarRing {
-      0%, 100% { opacity: 0; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.06); }
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(1.06);
+      }
     }
 
     /* Title typing cursor */
@@ -102,7 +149,18 @@
       margin-left: 1px;
       color: hsl(45, 100%, 72%);
     }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
 
     /* Stats counter row */
     .stats-row {
@@ -114,6 +172,7 @@
       background: var(--border-gradient-onyx);
       border-radius: 14px;
     }
+
     .stat-box {
       text-align: center;
       padding: 10px 6px;
@@ -122,7 +181,11 @@
       border: 1px solid hsl(0, 0%, 22%);
       transition: border-color 0.2s;
     }
-    .stat-box:hover { border-color: hsl(45, 100%, 72%); }
+
+    .stat-box:hover {
+      border-color: hsl(45, 100%, 72%);
+    }
+
     .stat-num {
       font-size: 20px;
       font-weight: 600;
@@ -130,6 +193,7 @@
       font-family: 'Poppins', sans-serif;
       line-height: 1.2;
     }
+
     .stat-lbl {
       font-size: 9.5px;
       color: hsl(0, 0%, 55%);
@@ -141,15 +205,18 @@
     .companies-section {
       margin-top: 24px;
     }
+
     .companies-section h3 {
       margin-bottom: 14px;
     }
+
     .companies-logos {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       align-items: center;
     }
+
     .company-badge {
       display: inline-flex;
       align-items: center;
@@ -164,18 +231,22 @@
       transition: border-color 0.2s, color 0.2s;
       text-decoration: none;
     }
+
     .company-badge:hover {
       border-color: hsl(45, 100%, 72%);
       color: hsl(45, 100%, 72%);
     }
+
     .company-badge img {
       width: 18px;
       height: 18px;
       object-fit: contain;
       border-radius: 3px;
     }
+
     .company-dot {
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: hsl(45, 100%, 72%);
       flex-shrink: 0;
@@ -192,18 +263,29 @@
       position: relative;
       overflow: hidden;
     }
+
     .exp-card::before {
       content: '';
       position: absolute;
-      left: 0; top: 0; bottom: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 3px;
-      background: linear-gradient(to bottom, hsl(45,100%,72%), transparent);
+      background: linear-gradient(to bottom, hsl(45, 100%, 72%), transparent);
       border-radius: 3px 0 0 3px;
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .exp-card:hover { border-color: hsl(45, 100%, 72%); transform: translateX(4px); }
-    .exp-card:hover::before { opacity: 1; }
+
+    .exp-card:hover {
+      border-color: hsl(45, 100%, 72%);
+      transform: translateX(4px);
+    }
+
+    .exp-card:hover::before {
+      opacity: 1;
+    }
+
     .exp-card-header {
       display: flex;
       justify-content: space-between;
@@ -212,26 +294,30 @@
       gap: 8px;
       margin-bottom: 8px;
     }
+
     .exp-card-title {
       font-size: 15px;
       font-weight: 600;
       color: hsl(0, 0%, 98%);
     }
+
     .exp-card-date {
       font-size: 12px;
       color: hsl(45, 100%, 72%);
-      background: hsla(45,100%,72%,0.1);
-      border: 1px solid hsla(45,100%,72%,0.2);
+      background: hsla(45, 100%, 72%, 0.1);
+      border: 1px solid hsla(45, 100%, 72%, 0.2);
       padding: 3px 10px;
       border-radius: 99px;
       white-space: nowrap;
     }
+
     .exp-card-company {
       font-size: 13px;
       color: hsl(45, 100%, 72%);
       font-weight: 500;
       margin-bottom: 10px;
     }
+
     .exp-card ul {
       padding-left: 0;
       list-style: none;
@@ -239,6 +325,7 @@
       flex-direction: column;
       gap: 5px;
     }
+
     .exp-card ul li {
       font-size: 13px;
       color: hsl(0, 0%, 55%);
@@ -246,6 +333,7 @@
       position: relative;
       line-height: 1.6;
     }
+
     .exp-card ul li::before {
       content: '›';
       position: absolute;
@@ -253,22 +341,29 @@
       color: hsl(45, 100%, 72%);
       font-weight: 700;
     }
-    .exp-card ul li strong { color: hsl(0, 0%, 84%); }
+
+    .exp-card ul li strong {
+      color: hsl(0, 0%, 84%);
+    }
 
     /* Contact form enhanced */
     .form-input {
       transition: border-color 0.25s, box-shadow 0.25s !important;
     }
+
     .form-input:focus {
       border-color: hsl(45, 100%, 72%) !important;
-      box-shadow: 0 0 0 3px hsla(45,100%,72%,0.12) !important;
+      box-shadow: 0 0 0 3px hsla(45, 100%, 72%, 0.12) !important;
     }
 
     /* Contact info cards */
     .contact-item {
       transition: transform 0.2s ease !important;
     }
-    .contact-item:hover { transform: translateX(5px); }
+
+    .contact-item:hover {
+      transform: translateX(5px);
+    }
 
     /* Form status */
     #status {
@@ -290,15 +385,22 @@
       outline: none;
       transition: border-color 0.25s;
     }
-    .form-input-select:focus { border-color: hsl(45,100%,72%); }
-    .form-input-select option { background: hsl(240,2%,12%); }
+
+    .form-input-select:focus {
+      border-color: hsl(45, 100%, 72%);
+    }
+
+    .form-input-select option {
+      background: hsl(240, 2%, 12%);
+    }
 
     /* Scroll to top button */
     #scrollTop {
       position: fixed;
       bottom: 28px;
       right: 28px;
-      width: 42px; height: 42px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: hsl(45, 100%, 72%);
       color: hsl(240, 2%, 12%);
@@ -313,32 +415,121 @@
       align-items: center;
       justify-content: center;
     }
-    #scrollTop.show { opacity: 1; transform: translateY(0); }
-    #scrollTop:hover { background: hsl(45,100%,60%); }
+
+    #scrollTop.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #scrollTop:hover {
+      background: hsl(45, 100%, 60%);
+    }
 
     /* Page load fade */
     main {
       animation: mainFadeIn 0.5s ease both;
     }
-    @keyframes mainFadeIn { from{opacity:0} to{opacity:1} }
+
+    @keyframes mainFadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
+    }
 
     /* Smooth testimonials modal override for index2.html */
     .modal-container .overlay {
       opacity: 0;
       transition: opacity 260ms ease;
     }
+
     .modal-container .testimonials-modal {
       opacity: 0;
       transform: translateY(12px) scale(0.98);
-      transition: opacity 280ms cubic-bezier(.2,.9,.2,1), transform 280ms cubic-bezier(.2,.9,.2,1);
+      transition: opacity 280ms cubic-bezier(.2, .9, .2, 1), transform 280ms cubic-bezier(.2, .9, .2, 1);
       pointer-events: none;
       will-change: opacity, transform;
     }
-    .modal-container.active .overlay { opacity: 1; }
+
+    .modal-container.active .overlay {
+      opacity: 1;
+    }
+
     .modal-container.active .testimonials-modal {
       opacity: 1;
       transform: translateY(0) scale(1);
       pointer-events: auto;
+    }
+
+    /* ── DETAILED SKILLS CARD ── */
+    .detailed-skills-card {
+      background: var(--bg-gradient-jet) !important;
+      border: 1px solid var(--jet) !important;
+      padding: 30px !important;
+      cursor: default !important;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detailed-skills-card::before {
+      display: none !important;
+    }
+
+    .detailed-skills-card li {
+      color: var(--light-gray) !important;
+      font-size: var(--fs-6) !important;
+      line-height: 1.8 !important;
+      margin-bottom: 0 !important;
+      text-align: left;
+    }
+
+    .detailed-skills-card li strong {
+      color: var(--orange-yellow-crayola) !important;
+      display: block;
+      margin-bottom: 6px;
+      font-size: var(--fs-5);
+      font-weight: var(--fw-600);
+    }
+
+    .classic-link-btn {
+      background: rgba(0, 243, 255, 0.06);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      color: var(--cyan-neon);
+      text-decoration: none;
+      font-family: var(--font-cyber);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Black button with cyan text; on hover invert colors */
+    .black-cyan-btn {
+      background: #000000;
+      border: 1px solid #00ffff !important;
+      color: #00ffff;
+    }
+
+    .black-cyan-btn:hover {
+      background: #00ffff !important;
+      color: #000000 !important;
+    }
+
+    .classic-link-btn:hover {
+      background: #00ffff !important;
+      color: #07080d !important;
+      box-shadow: 0 0 12px #00ffff;
+      transform: translateY(-1px);
     }
   </style>
 </head>
@@ -359,7 +550,15 @@
         <div class="info-content">
           <h1 class="name" title="Sohan Lal Kushwaha">Sohan Lal Kushwaha</h1>
           <p class="title" id="sideTitle">BD Executive · Pharma-AI Builder</p>
-          <a href="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/docs/Sohan_Lal_Resume.pdf" target="_blank" class="form-btn" style="margin-top:10px;display:inline-flex;gap:8px;align-items:center;">Download Resume</a>
+          <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px;">
+            <a href="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/docs/Sohan_Lal_Resume.pdf"
+              target="_blank" class="form-btn"
+              style="margin: 0 !important; display: flex; gap: 8px; align-items: center; justify-content: center; width: max-content !important; padding: 8px 16px !important; font-size: 12px !important; border-radius: 10px !important;">Download
+              Resume</a>
+            <a href="./index.html" class="black-cyan-btn"
+              style="margin: 0 !important; display: flex; gap: 8px; align-items: center; justify-content: center; width: max-content !important; padding: 8px 16px !important; font-size: 12px !important; border-radius: 10px !important; border: none; font-weight: bold; box-shadow: 0 0 10px hsla(45, 100%, 72%, 0.35);">3D
+              Console 🔮</a>
+          </div>
         </div>
 
         <button class="info_more-btn" data-sidebar-btn>
@@ -375,13 +574,7 @@
 
         <ul class="contacts-list">
 
-          <li class="contact-item">
-            <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
-            <div class="contact-info">
-              <p class="contact-title">Work Email</p>
-              <a href="mailto:sohan@genedrift.com" class="contact-link">sohan@genedrift.com</a>
-            </div>
-          </li>
+
 
           <li class="contact-item">
             <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
@@ -482,6 +675,11 @@
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
           </li>
+          <li class="navbar-item">
+            <a href="./index.html" class="navbar-link black-cyan-btn"
+              style="background:none; color: #00ffff ; border:none !important; border-radius:12px !important; font-weight: 600;">3D
+              Console 🔮</a>
+          </li>
         </ul>
       </nav>
 
@@ -494,36 +692,17 @@
 
         <section class="about-text anim-fadeup delay-1">
           <p>
-            Results-driven <strong>Business Development Executive at Genedrift</strong> with hands-on experience in international pharma sales, regulatory dossier management, and AI-driven automation. Closed <strong>400+ international projects</strong> across APAC and African markets, managed <strong>200+ clients</strong>, and built AI-powered lead generation pipelines from scratch.
+            Results-driven <strong>Business Development Executive at Genedrift</strong> with hands-on experience in
+            international pharma sales, regulatory dossier management, and AI-driven automation. Closed <strong>400+
+              international projects</strong> across APAC and African markets, managed <strong>200+ clients</strong>,
+            and built AI-powered lead generation pipelines from scratch.
           </p>
           <p>
-            Background spans end-to-end <strong>regulatory affairs</strong> across Philippines, Myanmar, Vietnam, and Thailand — eCTD compilation, GMP/GVP compliance, artwork review, and pharmacovigilance. Founder of the <strong>Pharmalite ecosystem</strong> — education, jobs, and AI platform serving <strong>5 million+ pharmacy students</strong> across India. Proficient in Python, JavaScript, PHP, and Node.js.
+            Background spans end-to-end <strong>regulatory affairs</strong> across Philippines, Myanmar, Vietnam, and
+            Thailand — eCTD compilation, GMP/GVP compliance, artwork review, and pharmacovigilance. Founder of the
+            <strong>Pharmalite ecosystem</strong> — education, jobs, and AI platform serving <strong>5 million+ pharmacy
+              students</strong> across India. Proficient in Python, JavaScript, PHP, and Node.js.
           </p>
-        </section>
-
-        <!-- Companies worked with -->
-        <section class="companies-section anim-fadeup delay-2">
-          <h3 class="h3 clients-title">Worked With &amp; Built</h3>
-          <div class="companies-logos">
-            <a href="https://genedrift.com" target="_blank" class="company-badge">
-              <span class="company-dot"></span> Genedrift
-            </a>
-            <a href="https://pharmalite.in" target="_blank" class="company-badge">
-              <span class="company-dot"></span> Pharmalite
-            </a>
-            <a href="https://jobs.pharmalite.in" target="_blank" class="company-badge">
-              <span class="company-dot"></span> PharmaJobs
-            </a>
-            <a href="https://ai.pharmalite.in" target="_blank" class="company-badge">
-              <span class="company-dot"></span> PharmaChat AI
-            </a>
-            <a href="https://ai.pharmalite.in" target="_blank" class="company-badge">
-              <span class="company-dot"></span> PharmaPredict AI
-            </a>
-            <span class="company-badge">
-              <span class="company-dot"></span> Bundelkhand University
-            </span>
-          </div>
         </section>
 
         <!-- Skills -->
@@ -668,7 +847,9 @@
                 </figure>
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Listening To Music</h4>
                 <div class="testimonials-text" data-testimonials-text>
-                  <p>I have a deep appreciation for diverse musical genres, particularly Hindi, Punjabi, and Bhojpuri songs. My musical tastes span from the timeless classics of Lata Mangeshkar and Kumar Sanu to contemporary artists like Palak Muchhal and Honey Singh.</p>
+                  <p>I have a deep appreciation for diverse musical genres, particularly Hindi, Punjabi, and Bhojpuri
+                    songs. My musical tastes span from the timeless classics of Lata Mangeshkar and Kumar Sanu to
+                    contemporary artists like Palak Muchhal and Honey Singh.</p>
                 </div>
               </div>
             </li>
@@ -682,7 +863,9 @@
                 </figure>
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Web Development &amp; AI</h4>
                 <div class="testimonials-text" data-testimonials-text>
-                  <p>I have built Pharmalite.in (5M+ students), PharmaJobs, PharmaChat AI (100% pharmacology accuracy), and PharmaPredict AI (ADMET prediction). I combine programming skills with pharmaceutical domain knowledge to build innovative health-tech solutions.</p>
+                  <p>I have built Pharmalite.in (5M+ students), PharmaJobs, PharmaChat AI (100% pharmacology accuracy),
+                    and PharmaPredict AI (ADMET prediction). I combine programming skills with pharmaceutical domain
+                    knowledge to build innovative health-tech solutions.</p>
                 </div>
               </div>
             </li>
@@ -696,7 +879,8 @@
                 </figure>
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Creative Writing</h4>
                 <div class="testimonials-text" data-testimonials-text>
-                  <p>I am passionate about creative writing on health and pharmacy topics, regularly published at <a href="https://blog.pharmalite.in">blog.pharmalite.in</a>. I also enjoy writing shayari shared on Instagram <a href="https://instagram.com/sohanlalkush">@sohanlalkush</a>.</p>
+                  <p>I am passionate about creative writing on health and pharmacy topics, regularly published at <a
+                      href="https://blog.pharmalite.in">blog.pharmalite.in</a>.</p>
                 </div>
               </div>
             </li>
@@ -710,7 +894,9 @@
                 </figure>
                 <h4 class="h4 testimonials-item-title" data-testimonials-title>Social Media &amp; Community</h4>
                 <div class="testimonials-text" data-testimonials-text>
-                  <p>I manage the Pharmalite YouTube channel with 12,000+ subscribers, host live expert sessions, and run the Pharmalite community across platforms. These experiences have shaped my skills in digital marketing, content creation, and community building.</p>
+                  <p>I manage the Pharmalite YouTube channel with 12,000+ subscribers, host live expert sessions, and
+                    run the Pharmalite community across platforms. These experiences have shaped my skills in digital
+                    marketing, content creation, and community building.</p>
                 </div>
               </div>
             </li>
@@ -746,22 +932,27 @@
           <ul class="clients-list has-scrollbar">
             <li class="clients-item">
               <a href="https://genedrift.com" target="_blank">
-                <img src="./assets/images/logo-1-color.png" alt="Genedrift">
+                <img src="https://genedrift.com/files/Logo%20-%20Smaller%20Size.jpg" alt="Genedrift">
               </a>
             </li>
             <li class="clients-item">
               <a href="https://pharmalite.in" target="_blank">
-                <img src="./assets/images/logo-2-color.png" alt="Pharmalite">
+                <img src="./assets/images/logo-1-color.png" alt="Pharmalite">
               </a>
             </li>
             <li class="clients-item">
               <a href="https://jobs.pharmalite.in" target="_blank">
-                <img src="./assets/images/logo-3-color.png" alt="PharmaJobs">
+                <img src="./assets/images/pharmajobs.png" alt="PharmaJobs">
               </a>
             </li>
             <li class="clients-item">
               <a href="https://ai.pharmalite.in" target="_blank">
                 <img src="./assets/images/logo-4-color.png" alt="PharmaChat AI">
+              </a>
+            </li>
+            <li class="clients-item">
+              <a href="https://www.facebook.com/Medicofact.in/" target="_blank">
+                <img src="./assets/images/logo-3-color.png" alt="Medicofact.in">
               </a>
             </li>
           </ul>
@@ -790,12 +981,18 @@
             </div>
             <div class="exp-card-company">Genedrift · Mumbai, India (Hybrid)</div>
             <ul>
-              <li>Achieved peak monthly revenue of <strong>six-figure USD</strong> milestone, consistently exceeding targets through strategic client acquisition and AI-driven automation.</li>
-              <li>Closed <strong>400+ international projects</strong>; managed 30+ active projects and <strong>200+ client portfolio</strong> across APAC and African markets.</li>
-              <li>Guided <strong>20+ Indian manufacturers</strong> through market entry into Philippines, Myanmar, Vietnam, and other APAC markets.</li>
-              <li>Engineered <strong>3 SOPs</strong>: Lead Intelligence, Opportunity Management, and After-Sales Operations.</li>
-              <li>Architected <strong>AI-powered lead generation</strong> systems using Python, JavaScript, PHP with web scraping and Zoho CRM enrichment pipelines.</li>
-              <li>Trained and mentored <strong>3 sales trainees</strong> in prospecting, CRM usage, and business communication.</li>
+              <li>Achieved peak monthly revenue of <strong>six-figure USD</strong> milestone, consistently exceeding
+                targets through strategic client acquisition and AI-driven automation.</li>
+              <li>Closed <strong>400+ international projects</strong>; managed 30+ active projects and <strong>200+
+                  client portfolio</strong> across APAC and African markets.</li>
+              <li>Guided <strong>20+ Indian manufacturers</strong> through market entry into Philippines, Myanmar,
+                Vietnam, and other APAC markets.</li>
+              <li>Engineered <strong>3 SOPs</strong>: Lead Intelligence, Opportunity Management, and After-Sales
+                Operations.</li>
+              <li>Architected <strong>AI-powered lead generation</strong> systems using Python, JavaScript, PHP with web
+                scraping and Zoho CRM enrichment pipelines.</li>
+              <li>Trained and mentored <strong>3 sales trainees</strong> in prospecting, CRM usage, and business
+                communication.</li>
             </ul>
           </div>
 
@@ -806,10 +1003,14 @@
             </div>
             <div class="exp-card-company">Genedrift · Dehradun, India (Remote)</div>
             <ul>
-              <li>Compiled <strong>10+ eCTD dossiers</strong> and <strong>30+ APAC-format registration dossiers</strong> for Philippines, Myanmar, Thailand, and Vietnam.</li>
-              <li>Reviewed <strong>100+ regulatory dossiers</strong> and <strong>400+ product artworks</strong> for compliance with local requirements.</li>
-              <li>Evaluated <strong>10+ Bioequivalence (BE) studies</strong>; reviewed 10+ site documents for GMP inspection readiness.</li>
-              <li>Hands-on <strong>ICSR preparation, Signal Detection, and GVP compliance</strong> throughout all dossier work.</li>
+              <li>Compiled <strong>10+ eCTD dossiers</strong> and <strong>30+ APAC-format registration dossiers</strong>
+                for Philippines, Myanmar, Thailand, and Vietnam.</li>
+              <li>Reviewed <strong>100+ regulatory dossiers</strong> and <strong>400+ product artworks</strong> for
+                compliance with local requirements.</li>
+              <li>Evaluated <strong>10+ Bioequivalence (BE) studies</strong>; reviewed 10+ site documents for GMP
+                inspection readiness.</li>
+              <li>Hands-on <strong>ICSR preparation, Signal Detection, and GVP compliance</strong> throughout all
+                dossier work.</li>
               <li>Trained <strong>5 junior trainees</strong> in dossier preparation and APAC submission protocols.</li>
             </ul>
           </div>
@@ -821,11 +1022,16 @@
             </div>
             <div class="exp-card-company">Pharmalite · pharmalite.in · Kanpur, India</div>
             <ul>
-              <li>Founded Pharmalite during <strong>first year of B.Pharm</strong> after a 13,000-student survey; now serves <strong>5 million+ pharmacy students</strong> across India.</li>
-              <li>Launched <strong>PharmaJobs</strong> (jobs.pharmalite.in) — niche pharma job portal processing 5,000+ applications with AI-powered fraud detection; 30+ listings/month.</li>
-              <li>Built <strong>PharmaChat AI</strong> — multi-module assistant (PharmaChat, MediProGuide, MedicoChat) achieving <strong>100% pharmacology accuracy</strong>; accessible via web and WhatsApp.</li>
-              <li>Developed <strong>PharmaPredict AI</strong> — ML platform for ADMET prediction and SAR-based molecular activity screening.</li>
-              <li>Grew YouTube community to <strong>12,000+ subscribers</strong>; hosted 10+ live expert academic sessions during college.</li>
+              <li>Founded Pharmalite during <strong>first year of B.Pharm</strong> after a 13,000-student survey; now
+                serves <strong>5 million+ pharmacy students</strong> across India.</li>
+              <li>Launched <strong>PharmaJobs</strong> (jobs.pharmalite.in) — niche pharma job portal processing 5,000+
+                applications with AI-powered fraud detection; 30+ listings/month.</li>
+              <li>Built <strong>PharmaChat AI</strong> — multi-module assistant (PharmaChat, MediProGuide, MedicoChat)
+                achieving <strong>100% pharmacology accuracy</strong>; accessible via web and WhatsApp.</li>
+              <li>Developed <strong>PharmaPredict AI</strong> — ML platform for ADMET prediction and SAR-based molecular
+                activity screening.</li>
+              <li>Grew YouTube community to <strong>12,000+ subscribers</strong>; hosted 10+ live expert academic
+                sessions during college.</li>
             </ul>
           </div>
         </section>
@@ -840,17 +1046,22 @@
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">Bachelor of Pharmacy (B.Pharm)</h4>
               <span>2020 – 2024</span>
-              <p class="timeline-text">Completed B.Pharm from Bundelkhand University Jhansi with <strong>Grade A (75%)</strong>. Major project: <em>Integrating AI in Pharma: Revolutionizing Drug Discovery and Formulation for Future Healthcare</em>. Poster presenter at NPPRD 2023 International Conference. Founded Pharmalite and PharmaJobs during college.</p>
+              <p class="timeline-text">Completed B.Pharm from Bundelkhand University Jhansi with <strong>Grade A
+                  (75%)</strong>. Major project: <em>Integrating AI in Pharma: Revolutionizing Drug Discovery and
+                  Formulation for Future Healthcare</em>. Poster presenter at NPPRD 2023 International Conference.
+                Founded Pharmalite and PharmaJobs during college.</p>
             </li>
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">Intermediate (XII)</h4>
               <span>2016 – 2017</span>
-              <p class="timeline-text">Passed Senior Secondary School Examination with Grade A from Rohan Singh Inter College, Kanpur.</p>
+              <p class="timeline-text">Passed Senior Secondary School Examination with Grade A from Rohan Singh Inter
+                College, Kanpur.</p>
             </li>
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">High School (X)</h4>
               <span>2014 – 2015</span>
-              <p class="timeline-text">Passed Higher Secondary School Examination with 68% from Rohan Singh Inter College, Kanpur.</p>
+              <p class="timeline-text">Passed Higher Secondary School Examination with 68% from Rohan Singh Inter
+                College, Kanpur.</p>
             </li>
           </ol>
         </section>
@@ -864,17 +1075,27 @@
           <ol class="timeline-list">
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">
-                <a href="https://blog.pharmalite.in/2024/02/use%20of%20artificial%20intelligence%20in%20pharmaceuticals%20Sohan%20lal.html" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Use of Artificial Intelligence in Pharmaceuticals ↗</a>
+                <a href="https://blog.pharmalite.in/2024/02/use%20of%20artificial%20intelligence%20in%20pharmaceuticals%20Sohan%20lal.html"
+                  target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Use of
+                  Artificial Intelligence in Pharmaceuticals ↗</a>
               </h4>
               <span>Nov 2023 – Feb 2024</span>
-              <p class="timeline-text">62-page comprehensive research review on AI integration in pharmaceutical R&amp;D — covering QSAR modeling, PBPK simulation, ADMET prediction, and pharmacovigilance automation. Published online. Presented as poster at NPPRD 2023 International Conference, Bundelkhand University.</p>
+              <p class="timeline-text">62-page comprehensive research review on AI integration in pharmaceutical R&amp;D
+                — covering QSAR modeling, PBPK simulation, ADMET prediction, and pharmacovigilance automation. Published
+                online. Presented as poster at NPPRD 2023 International Conference, Bundelkhand University.</p>
             </li>
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">
-                <a href="https://blog.pharmalite.in/2024/05/integrating-ai-in-pharma.html" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Integrating AI in Pharma: Revolutionizing Drug Discovery and Formulation for Future Healthcare ↗</a>
+                <a href="https://blog.pharmalite.in/2024/05/integrating-ai-in-pharma.html" target="_blank"
+                  style="color:inherit;text-decoration:underline;text-underline-offset:3px">Integrating AI in Pharma:
+                  Revolutionizing Drug Discovery and Formulation for Future Healthcare ↗</a>
               </h4>
               <span>Feb 2024 – May 2024</span>
-              <p class="timeline-text">Final year major project on polypharmacology, AI-driven drug discovery pipelines, high-throughput screening, and computational formulation design. Directly led to development of <strong>PharmaPredict AI</strong> — a live ML platform for ADMET and SAR-based molecular activity prediction.</p>
+              <p class="timeline-text">Final year major project on polypharmacology, AI-driven drug discovery pipelines,
+                high-throughput screening, and computational formulation design. Directly led to development of
+                <strong>PharmaPredict AI</strong> — a live ML platform for ADMET and SAR-based molecular activity
+                prediction.
+              </p>
             </li>
           </ol>
         </section>
@@ -887,19 +1108,30 @@
           </div>
           <ol class="timeline-list">
             <li class="timeline-item">
-              <h4 class="h4 timeline-item-title"><a href="https://ai.pharmalite.in" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaChat AI ↗</a></h4>
+              <h4 class="h4 timeline-item-title"><a href="https://ai.pharmalite.in" target="_blank"
+                  style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaChat AI ↗</a></h4>
               <span>2023 – Present</span>
-              <p class="timeline-text">Multi-module AI assistant ecosystem for pharmacy and healthcare — PharmaChat, MediProGuide, MedicoChat, and AI Assistant. Achieves <strong>100% pharmacology</strong> and <strong>95% clinical pharmacy accuracy</strong>. Built with Python, PHP, Node.js; accessible via web and WhatsApp. Developed in partnership with Medicofact under the Pharmalite ecosystem.</p>
+              <p class="timeline-text">Multi-module AI assistant ecosystem for pharmacy and healthcare — PharmaChat,
+                MediProGuide, MedicoChat, and AI Assistant. Achieves <strong>100% pharmacology</strong> and <strong>95%
+                  clinical pharmacy accuracy</strong>. Built with Python, PHP, Node.js; accessible via web and WhatsApp.
+                Developed in partnership with Medicofact under the Pharmalite ecosystem.</p>
             </li>
             <li class="timeline-item">
-              <h4 class="h4 timeline-item-title"><a href="https://ai.pharmalite.in" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaPredict AI ↗</a></h4>
+              <h4 class="h4 timeline-item-title"><a href="https://ai.pharmalite.in" target="_blank"
+                  style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaPredict AI ↗</a></h4>
               <span>2024 – Present</span>
-              <p class="timeline-text">ML web platform for predicting molecular ADMET properties (Absorption, Distribution, Metabolism, Excretion, Toxicity) using Structure-Activity Relationships (SAR). Enables early in-silico drug candidate screening to reduce late-stage R&amp;D failures. Built with Python, PHP, and MySQL.</p>
+              <p class="timeline-text">ML web platform for predicting molecular ADMET properties (Absorption,
+                Distribution, Metabolism, Excretion, Toxicity) using Structure-Activity Relationships (SAR). Enables
+                early in-silico drug candidate screening to reduce late-stage R&amp;D failures. Built with Python, PHP,
+                and MySQL.</p>
             </li>
             <li class="timeline-item">
-              <h4 class="h4 timeline-item-title"><a href="https://jobs.pharmalite.in" target="_blank" style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaJobs ↗</a></h4>
+              <h4 class="h4 timeline-item-title"><a href="https://jobs.pharmalite.in" target="_blank"
+                  style="color:inherit;text-decoration:underline;text-underline-offset:3px">PharmaJobs ↗</a></h4>
               <span>Jun 2024 – Present</span>
-              <p class="timeline-text">Niche pharmaceutical and healthcare job portal processing <strong>5,000+ applications</strong> with <strong>30+ verified listings/month</strong>. Integrated AI-based scam detection system for 100% listing quality. Built during final year of B.Pharm.</p>
+              <p class="timeline-text">Niche pharmaceutical and healthcare job portal processing <strong>5,000+
+                  applications</strong> with <strong>30+ verified listings/month</strong>. Integrated AI-based scam
+                detection system for 100% listing quality. Built during final year of B.Pharm.</p>
             </li>
           </ol>
         </section>
@@ -914,17 +1146,25 @@
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">NPPRD 2023 — International Conference, Poster Presenter</h4>
               <span>Feb 2023</span>
-              <p class="timeline-text">International Conference on New Paradigms in Pharmaceutical Research and Development organized by Institute of Pharmacy, Bundelkhand University Jhansi. Active volunteer and participant. Poster Presentation: <em>"Revolutionizing Pharmaceuticals: The Power of Artificial Intelligence."</em></p>
+              <p class="timeline-text">International Conference on New Paradigms in Pharmaceutical Research and
+                Development organized by Institute of Pharmacy, Bundelkhand University Jhansi. Active volunteer and
+                participant. Poster Presentation: <em>"Revolutionizing Pharmaceuticals: The Power of Artificial
+                  Intelligence."</em></p>
             </li>
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">Volunteer — Animal Research Centre &amp; NAAC Inspection</h4>
               <span>Dec 2023</span>
-              <p class="timeline-text">Worked at Animal Research Centre, Bundelkhand University, as volunteer during NAAC peer visit. Authored SOPs for Animal House Facility under supervision of <strong>Prof. Dr. Sunil Kr. Prajapati</strong>. Gained experience in animal ethics, testing apparatus validation, and instrument operation.</p>
+              <p class="timeline-text">Worked at Animal Research Centre, Bundelkhand University, as volunteer during
+                NAAC peer visit. Authored SOPs for Animal House Facility under supervision of <strong>Prof. Dr. Sunil
+                  Kr. Prajapati</strong>. Gained experience in animal ethics, testing apparatus validation, and
+                instrument operation.</p>
             </li>
             <li class="timeline-item">
               <h4 class="h4 timeline-item-title">Boys Hostel Coordinator &amp; Community Initiatives</h4>
               <span>2020 – 2024</span>
-              <p class="timeline-text">Boys Hostel Coordinator at Bundelkhand University. Management Committee member for Annual Durga Puja organization. Co-founded a community kitchen initiative at university hostel. Volleyball and Badminton player.</p>
+              <p class="timeline-text">Boys Hostel Coordinator at Bundelkhand University. Management Committee member
+                for Annual Durga Puja organization. Co-founded a community kitchen initiative at university hostel.
+                Volleyball and Badminton player.</p>
             </li>
           </ol>
         </section>
@@ -962,12 +1202,24 @@
         <!-- Skills list -->
         <section class="skill anim-fadeup delay-4">
           <h3 class="h3 skills-title">Detailed Skills</h3>
-          <ul class="skills-list content-card">
-            <li><strong>Regulatory Affairs:</strong> Regulatory Affairs (APAC); Product Registration &amp; Submission; eCTD / CTD / ACTD Dossiers; CTD Module 1–5 Compilation; ASEAN / ICH Guidelines; GMP / GVP Compliance; Pharmacovigilance (PV); ICSR &amp; Signal Detection; Bioequivalence Review; Artwork &amp; Labelling Review; Variation &amp; Supplement Filing; Post-Approval Lifecycle Management; Risk Management Plan (RMP); Stability Data Review; Regulatory Intelligence; HA Query Management; QSAR / ADMET / PBPK.</li>
-            <li><strong>Business Development:</strong> Business Development (B2B); International Market Entry; Account Management; Client Retention &amp; Growth; Go-to-Market Strategy; Partnership Development; Revenue Growth &amp; Pipeline; Lead Generation (AI-driven); Stakeholder Engagement; CRM Management (Zoho); Sales Automation &amp; AI; Contract Lifecycle Management.</li>
-            <li><strong>Technology &amp; Automation:</strong> Python; JavaScript / Node.js; PHP; MySQL; Machine Learning / AI; n8n Automation; Make No-Code Automation; Zoho Creators ERP; Zoho Flow; Docker; REST API Development; Web Development; Google Cloud.</li>
-            <li><strong>Pharmaceutical Sciences &amp; Labs:</strong> QSAR / ADMET / PBPK; Drug Formulation; Pharmacokinetics; Pharmacovigilance; Clinical Trial Support; GCP; Laboratory Techniques (HPLC, UV/Vis, NMR, PCR).</li>
-            <li><strong>Soft Skills:</strong> Problem Solving; Time Management; Team Collaboration; Effective Communication; Critical Thinking; Adaptability; Training &amp; Mentorship.</li>
+          <ul class="skills-list content-card detailed-skills-card">
+            <li><strong>Regulatory Affairs:</strong> Regulatory Affairs (APAC); Product Registration &amp; Submission;
+              eCTD / CTD / ACTD Dossiers; CTD Module 1–5 Compilation; ASEAN / ICH Guidelines; GMP / GVP Compliance;
+              Pharmacovigilance (PV); ICSR &amp; Signal Detection; Bioequivalence Review; Artwork &amp; Labelling
+              Review; Variation &amp; Supplement Filing; Post-Approval Lifecycle Management; Risk Management Plan (RMP);
+              Stability Data Review; Regulatory Intelligence; HA Query Management; QSAR / ADMET / PBPK.</li>
+            <li><strong>Business Development:</strong> Business Development (B2B); International Market Entry; Account
+              Management; Client Retention &amp; Growth; Go-to-Market Strategy; Partnership Development; Revenue Growth
+              &amp; Pipeline; Lead Generation (AI-driven); Stakeholder Engagement; CRM Management (Zoho); Sales
+              Automation &amp; AI; Contract Lifecycle Management.</li>
+            <li><strong>Technology &amp; Automation:</strong> Python; JavaScript / Node.js; PHP; MySQL; Machine Learning
+              / AI; n8n Automation; Make No-Code Automation; Zoho Creators ERP; Zoho Flow; Docker; REST API Development;
+              Web Development; Google Cloud.</li>
+            <li><strong>Pharmaceutical Sciences &amp; Labs:</strong> QSAR / ADMET / PBPK; Drug Formulation;
+              Pharmacokinetics; Pharmacovigilance; Clinical Trial Support; GCP; Laboratory Techniques (HPLC, UV/Vis,
+              NMR, PCR).</li>
+            <li><strong>Soft Skills:</strong> Problem Solving; Time Management; Team Collaboration; Effective
+              Communication; Critical Thinking; Adaptability; Training &amp; Mentorship.</li>
           </ul>
         </section>
 
@@ -994,8 +1246,10 @@
                     <span class="dot"></span>
                     <time datetime="2024-05-29">May 29, 2024</time>
                   </div>
-                  <h3 class="h3 blog-item-title">The Severe Heatwave in India: Causes, Effects, and Preventive Measures</h3>
-                  <p class="blog-text">Explore the causes, effects, and preventive measures of the severe heatwave in India, with temperatures reaching 50°C.</p>
+                  <h3 class="h3 blog-item-title">The Severe Heatwave in India: Causes, Effects, and Preventive Measures
+                  </h3>
+                  <p class="blog-text">Explore the causes, effects, and preventive measures of the severe heatwave in
+                    India, with temperatures reaching 50°C.</p>
                 </div>
               </a>
             </li>
@@ -1011,14 +1265,17 @@
                     <span class="dot"></span>
                     <time datetime="2024-01-19">Jan 19, 2024</time>
                   </div>
-                  <h3 class="h3 blog-item-title">Silent Threats in Your Medicine Cabinet: Antacids &amp; The Shocking Connection to Kidney Damage</h3>
-                  <p class="blog-text">Emerging evidence suggests a potential association between prolonged antacid use and kidney complications.</p>
+                  <h3 class="h3 blog-item-title">Silent Threats in Your Medicine Cabinet: Antacids &amp; The Shocking
+                    Connection to Kidney Damage</h3>
+                  <p class="blog-text">Emerging evidence suggests a potential association between prolonged antacid use
+                    and kidney complications.</p>
                 </div>
               </a>
             </li>
 
             <li class="blog-post-item anim-fadeup delay-3">
-              <a href="https://blog.pharmalite.in/2023/02/career-options-and-higher-education-after-b-pharm.html?m=1" target="_blank">
+              <a href="https://blog.pharmalite.in/2023/02/career-options-and-higher-education-after-b-pharm.html?m=1"
+                target="_blank">
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-3.jpg" alt="Career after B Pharm" loading="lazy">
                 </figure>
@@ -1029,13 +1286,15 @@
                     <time datetime="2023-02-13">Feb 13, 2023</time>
                   </div>
                   <h3 class="h3 blog-item-title">Career Options and Higher Education after B.Pharm</h3>
-                  <p class="blog-text">An excellent guide for those with interest in pharmaceuticals, medical research, and drug development.</p>
+                  <p class="blog-text">An excellent guide for those with interest in pharmaceuticals, medical research,
+                    and drug development.</p>
                 </div>
               </a>
             </li>
 
             <li class="blog-post-item anim-fadeup delay-4">
-              <a href="https://blog.pharmalite.in/2023/02/second-heart-attack-cause-prevention.html?m=1" target="_blank">
+              <a href="https://blog.pharmalite.in/2023/02/second-heart-attack-cause-prevention.html?m=1"
+                target="_blank">
                 <figure class="blog-banner-box">
                   <img src="./assets/images/blog-4.jpg" alt="Second Heart Attack" loading="lazy">
                 </figure>
@@ -1046,7 +1305,8 @@
                     <time datetime="2023-02-05">Feb 05, 2023</time>
                   </div>
                   <h3 class="h3 blog-item-title">Second Heart Attack: Causes, Prevention and Medication</h3>
-                  <p class="blog-text">A second heart attack suggests the heart is not healing as it should and is at higher risk for further damage.</p>
+                  <p class="blog-text">A second heart attack suggests the heart is not healing as it should and is at
+                    higher risk for further damage.</p>
                 </div>
               </a>
             </li>
@@ -1065,7 +1325,9 @@
 
         <section class="mapbox" data-mapbox>
           <figure>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28589.032126627575!2d80.31135551833328!3d26.448316980272105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c386c2de14edb%3A0x9c1b52653f7e7993!2sKanpur%2C%20Uttar%20Pradesh%2C%20India!5e0!3m2!1sen!2sus!4v1626892124956!5m2!1sen!2sus" width="400" height="300" loading="lazy"></iframe>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28589.032126627575!2d80.31135551833328!3d26.448316980272105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c386c2de14edb%3A0x9c1b52653f7e7993!2sKanpur%2C%20Uttar%20Pradesh%2C%20India!5e0!3m2!1sen!2sus!4v1626892124956!5m2!1sen!2sus"
+              width="400" height="300" loading="lazy"></iframe>
           </figure>
         </section>
 
@@ -1076,12 +1338,15 @@
           <form action="#" class="form" data-form id="contactForm" onsubmit="return submitForm();">
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input id="fullname">
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input id="email">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input
+                id="fullname">
+              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input
+                id="email">
             </div>
 
             <div class="input-wrapper" style="margin-bottom:16px">
-              <input type="text" name="phone" class="form-input" placeholder="Phone / WhatsApp (optional)" data-form-input id="phone">
+              <input type="text" name="phone" class="form-input" placeholder="Phone / WhatsApp (optional)"
+                data-form-input id="phone">
               <select name="subject" class="form-input-select" id="subject">
                 <option value="">Select topic (optional)</option>
                 <option>Business Development / Partnership</option>
@@ -1093,7 +1358,8 @@
               </select>
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input id="message"></textarea>
+            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input
+              id="message"></textarea>
 
             <button class="form-btn" type="submit" disabled data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
@@ -1120,9 +1386,9 @@
     /* ── TELEGRAM (existing bot kept) ── */
     function submitForm() {
       const website = window.location.host;
-      const name    = document.getElementById('fullname').value;
-      const email   = document.getElementById('email').value;
-      const phone   = document.getElementById('phone').value;
+      const name = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('message').value;
 
@@ -1132,7 +1398,7 @@
       }
 
       const text = `🔔 New message from: ${website}\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone || '—'}\n📌 Subject: ${subject || '—'}\n\n💬 Message:\n${message}`;
-      const url  = `https://api.telegram.org/bot6109747569:AAFl8r998Bg9G1Q-I6YAdhznKo5Q8mjl7Es/sendMessage?chat_id=-1001863890258&text=${encodeURIComponent(text)}`;
+      const url = `https://api.telegram.org/bot6109747569:AAFl8r998Bg9G1Q-I6YAdhznKo5Q8mjl7Es/sendMessage?chat_id=-1001863890258&text=${encodeURIComponent(text)}`;
 
       const xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
@@ -1142,7 +1408,7 @@
           document.getElementById('status').innerHTML = '<span style="color:#a9e34b;font-weight:500">✓ Message sent! I\'ll get back to you within 24 hours.</span>';
           document.querySelector('[data-form-btn]').disabled = true;
         } else {
-          document.getElementById('status').innerHTML = '<span style="color:#e05a5a">Something went wrong. Please email me directly at sohan@genedrift.com</span>';
+          document.getElementById('status').innerHTML = '<span style="color:#e05a5a">Something went wrong. Please email me directly at sohanlalkush@hotmail.com</span>';
         }
       };
       xhr.send();
@@ -1151,14 +1417,14 @@
 
     /* ── FORM ENABLE/DISABLE ── */
     document.addEventListener('DOMContentLoaded', () => {
-      const form   = document.getElementById('contactForm');
+      const form = document.getElementById('contactForm');
       const inputs = form.querySelectorAll('[data-form-input]');
       const button = form.querySelector('[data-form-btn]');
       inputs.forEach(input => {
         input.addEventListener('input', () => {
           const name = document.getElementById('fullname').value;
           const email = document.getElementById('email').value;
-          const msg   = document.getElementById('message').value;
+          const msg = document.getElementById('message').value;
           button.disabled = !(name && email && msg);
         });
       });
@@ -1195,9 +1461,9 @@
     /* ── COUNTER ANIMATION ── */
     function animateCounter(el) {
       const target = parseInt(el.dataset.count);
-      let current  = 0;
-      const step   = Math.ceil(target / 50);
-      const timer  = setInterval(() => {
+      let current = 0;
+      const step = Math.ceil(target / 50);
+      const timer = setInterval(() => {
         current = Math.min(current + step, target);
         el.textContent = current + '+';
         if (current >= target) clearInterval(timer);
@@ -1263,4 +1529,5 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
+
 </html>

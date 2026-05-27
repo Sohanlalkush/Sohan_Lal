@@ -1,821 +1,2864 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sohan Lal Kushwaha — Pharma · BD · AI Builder</title>
-<meta name="description" content="Business Development Executive at Genedrift | Founder of Pharmalite, PharmaJobs, PharmaChat AI | Regulatory Affairs | APAC & Africa">
-<link rel="icon" href="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/images/logo.ico" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --navy:#0a1628;
-  --navy2:#0f2042;
-  --blue:#1a5276;
-  --accent:#2e86c1;
-  --accent2:#5dade2;
-  --gold:#f0b429;
-  --white:#f4f8fb;
-  --grey:#8fa5bc;
-  --card:#111e35;
-  --card2:#162038;
-  --border:rgba(93,173,226,0.15);
-  --glow:rgba(46,134,193,0.25);
-  --r:16px;
-}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;cursor:none}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sohan Lal Kushwaha — Interactive 3D Resume Console</title>
+  <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
 
-/* ── CURSOR ── */
-#cursor{position:fixed;width:12px;height:12px;background:var(--accent2);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s;mix-blend-mode:difference}
-#cursor-ring{position:fixed;width:40px;height:40px;border:1.5px solid var(--accent2);border-radius:50%;pointer-events:none;z-index:9998;transition:all .15s ease;opacity:.6}
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 
-/* ── NOISE OVERLAY ── */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+  <!-- Icon Libraries -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--navy)}
-::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 48px;backdrop-filter:blur(20px);background:rgba(10,22,40,.7);border-bottom:1px solid var(--border);transition:all .3s}
-nav.scrolled{padding:14px 48px;background:rgba(10,22,40,.95)}
-.nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.5px;color:var(--white);text-decoration:none}
-.nav-logo span{color:var(--accent2)}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{color:var(--grey);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s;position:relative}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1.5px;background:var(--accent2);transition:width .3s}
-.nav-links a:hover{color:var(--white)}
-.nav-links a:hover::after{width:100%}
-.nav-cta{background:var(--accent);color:#fff!important;padding:8px 20px;border-radius:99px!important;font-weight:600!important}
-.nav-cta:hover{background:var(--accent2)!important}
-.nav-cta::after{display:none!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:all .3s}
+  <style>
+    /* ── CORE DESIGN SYSTEM & FUTURE THEMING ── */
+    :root {
+      --bg-dark: #05060a;
+      --bg-card: rgba(10, 14, 26, 0.75);
+      --bg-glass: rgba(8, 12, 22, 0.5);
+      --border-glow: rgba(255, 202, 71, 0.12);
 
-/* ── HERO ── */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 48px 80px;gap:60px;position:relative;overflow:hidden}
-.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:.3;pointer-events:none}
-.hero-bg-glow{position:absolute;top:-200px;right:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(46,134,193,.2) 0%,transparent 70%);pointer-events:none;animation:pulse 6s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.1);opacity:1}}
-.hero-left{position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,134,193,.12);border:1px solid var(--border);padding:6px 16px;border-radius:99px;font-size:13px;color:var(--accent2);margin-bottom:24px;animation:fadeUp .8s ease both}
-.hero-badge-dot{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-h1.hero-name{font-family:'Syne',sans-serif;font-size:clamp(42px,5vw,68px);font-weight:800;line-height:1.05;letter-spacing:-2px;animation:fadeUp .8s .1s ease both}
-h1.hero-name .line2{color:var(--accent2)}
-.hero-tagline{font-size:18px;color:var(--grey);margin:20px 0 32px;line-height:1.5;max-width:480px;animation:fadeUp .8s .2s ease both}
-.hero-tagline strong{color:var(--white)}
-.hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;animation:fadeUp .8s .3s ease both}
-.pill{padding:6px 16px;border-radius:99px;font-size:13px;font-weight:500;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--grey);transition:all .2s}
-.pill:hover{border-color:var(--accent2);color:var(--accent2);background:rgba(93,173,226,.08)}
-.hero-actions{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp .8s .4s ease both}
-.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:14px 32px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;transition:all .3s;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px var(--glow)}
-.btn-outline{border:1.5px solid var(--border);color:var(--white);padding:14px 32px;border-radius:12px;font-weight:500;font-size:15px;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px;background:transparent}
-.btn-outline:hover{border-color:var(--accent2);background:rgba(93,173,226,.08);transform:translateY(-2px)}
-.hero-right{display:flex;flex-direction:column;align-items:center;gap:32px;position:relative;z-index:1;animation:fadeRight .8s .2s ease both}
-.hero-photo-wrap{position:relative;width:280px;height:280px}
-.hero-photo-ring{position:absolute;inset:-12px;border-radius:50%;border:2px solid transparent;background:linear-gradient(135deg,var(--accent),transparent,var(--accent2)) border-box;animation:spin 12s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.hero-photo{width:280px;height:280px;border-radius:50%;object-fit:cover;object-position:top;border:4px solid var(--navy2);position:relative;z-index:1}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;text-align:center;transition:all .3s}
-.stat-card:hover{border-color:var(--accent2);transform:translateY(-3px);box-shadow:0 8px 24px var(--glow)}
-.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent2);line-height:1}
-.stat-label{font-size:12px;color:var(--grey);margin-top:4px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeRight{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+      /* Colors */
+      --cyan-neon: #00f3ff;
+      --cyan-glow: rgba(0, 243, 255, 0.3);
+      --gold-neon: #ffca47;
+      --gold-glow: rgba(255, 202, 71, 0.3);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
 
-/* ── SECTIONS ── */
-section{padding:100px 48px;position:relative}
-.section-label{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:16px}
-.section-label::before{content:'';width:24px;height:2px;background:var(--accent2)}
-.section-title{font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,48px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:16px}
-.section-sub{color:var(--grey);font-size:17px;max-width:560px;line-height:1.6}
+      /* Font stacks */
+      --font-ui: 'Poppins', sans-serif;
+      --font-cyber: 'Orbitron', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
 
-/* ── ABOUT ── */
-#about{background:var(--navy)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:64px;align-items:start}
-.about-text p{color:var(--grey);line-height:1.8;margin-bottom:20px}
-.about-text p strong{color:var(--white)}
-.about-highlights{display:flex;flex-direction:column;gap:20px}
-.highlight-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:all .3s;position:relative;overflow:hidden}
-.highlight-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(46,134,193,.05),transparent);opacity:0;transition:.3s}
-.highlight-card:hover{border-color:var(--accent2);transform:translateX(6px)}
-.highlight-card:hover::before{opacity:1}
-.highlight-icon{font-size:28px;margin-bottom:12px}
-.highlight-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:6px}
-.highlight-desc{color:var(--grey);font-size:14px}
+      /* 3D Ring Dimensions (6-panel layout) */
+      --panel-width: 650px;
+      --panel-height: 570px;
+      --translate-z: 563px;
+      /* Math: width / (2 * tan(30deg)) -> 650 / 1.1547 = 563px */
+    }
 
-/* ── EXPERIENCE ── */
-#experience{background:var(--navy2)}
-.exp-grid{margin-top:64px;display:grid;gap:24px}
-.exp-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:36px;display:grid;grid-template-columns:auto 1fr;gap:24px;transition:all .3s;position:relative;overflow:hidden}
-.exp-card::after{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:linear-gradient(var(--accent),var(--accent2));transition:height .4s;border-radius:0 0 4px 0}
-.exp-card:hover{border-color:var(--accent2);box-shadow:0 12px 40px rgba(0,0,0,.3);transform:translateY(-3px)}
-.exp-card:hover::after{height:100%}
-.exp-logo{width:60px;height:60px;border-radius:12px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-.exp-logo img{width:100%;height:100%;object-fit:contain;padding:6px}
-.exp-logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:11px;color:var(--accent2);text-align:center;padding:4px;line-height:1.2}
-.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:8px}
-.exp-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px}
-.exp-date{font-size:13px;color:var(--accent2);background:rgba(46,134,193,.12);border:1px solid var(--border);padding:4px 12px;border-radius:99px;white-space:nowrap}
-.exp-company{color:var(--accent2);font-weight:500;font-size:15px;margin-bottom:4px}
-.exp-location{color:var(--grey);font-size:13px;margin-bottom:16px}
-.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:8px}
-.exp-bullets li{color:var(--grey);font-size:14.5px;padding-left:20px;position:relative;line-height:1.6}
-.exp-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent2);font-weight:700}
-.exp-bullets li strong{color:var(--white)}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold-neon) rgba(0, 0, 0, 0.25);
+    }
 
-/* ── COMPANIES ── */
-.companies-strip{margin-top:64px}
-.companies-title{text-align:center;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);margin-bottom:32px}
-.companies-logos{display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap}
-.company-logo-item{display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.6;transition:opacity .3s;cursor:default}
-.company-logo-item:hover{opacity:1}
-.company-logo-box{width:80px;height:50px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:8px;overflow:hidden}
-.company-logo-box img{max-width:100%;max-height:100%;object-fit:contain;filter:brightness(1.2)}
-.company-logo-text-badge{font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:var(--accent2);letter-spacing:-.3px}
-.company-name-label{font-size:11px;color:var(--grey)}
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
 
-/* ── PROJECTS ── */
-#projects{background:var(--navy)}
-.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:64px}
-.proj-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;transition:all .3s;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:16px}
-.proj-card::before{content:'';position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(circle,var(--glow),transparent 70%);opacity:0;transition:.4s}
-.proj-card:hover{border-color:var(--accent2);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
-.proj-card:hover::before{opacity:1}
-.proj-card.featured{grid-column:1/-1}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start}
-.proj-icon{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.proj-links{display:flex;gap:8px}
-.proj-link{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--grey);text-decoration:none;transition:all .2s;font-size:16px}
-.proj-link:hover{border-color:var(--accent2);color:var(--accent2);background:rgba(93,173,226,.08)}
-.proj-name{font-family:'Syne',sans-serif;font-weight:700;font-size:20px}
-.proj-desc{color:var(--grey);font-size:14.5px;line-height:1.7;flex:1}
-.proj-stats{display:flex;gap:16px;flex-wrap:wrap}
-.proj-stat{font-size:13px;color:var(--accent2);font-weight:600}
-.proj-stat span{color:var(--grey);font-weight:400}
-.proj-tags{display:flex;flex-wrap:wrap;gap:8px}
-.proj-tag{font-size:12px;padding:4px 12px;border-radius:99px;background:rgba(46,134,193,.1);border:1px solid rgba(93,173,226,.2);color:var(--accent2)}
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.4);
+    }
 
-/* ── SKILLS ── */
-#skills{background:var(--navy2)}
-.skills-container{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.skill-group{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px}
-.skill-group-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;display:flex;align-items:center;gap:10px}
-.skill-group-icon{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:16px}
-.skill-bars{display:flex;flex-direction:column;gap:16px}
-.skill-bar-item{}
-.skill-bar-top{display:flex;justify-content:space-between;margin-bottom:6px}
-.skill-bar-name{font-size:13.5px;color:var(--white)}
-.skill-bar-pct{font-size:12px;color:var(--accent2);font-weight:600}
-.skill-bar-bg{height:5px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
-.skill-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+    ::-webkit-scrollbar-thumb {
+      background: var(--gold-neon);
+      border-radius: 4px;
+    }
 
-/* ── EDUCATION ── */
-#education{background:var(--navy)}
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:64px}
-.edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:32px;transition:all .3s}
-.edu-card:hover{border-color:var(--accent2);transform:translateY(-3px)}
-.edu-year{font-size:12px;color:var(--accent2);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-.edu-degree{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:4px}
-.edu-school{color:var(--grey);font-size:14px;margin-bottom:12px}
-.edu-grade{display:inline-block;background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.3);color:var(--gold);padding:4px 12px;border-radius:99px;font-size:12px;font-weight:600}
-.cert-list{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.cert-item{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s}
-.cert-item:hover{border-color:var(--accent2)}
-.cert-name{font-weight:500;font-size:14px;margin-bottom:4px}
-.cert-issuer{font-size:12px;color:var(--grey)}
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan-neon);
+    }
 
-/* ── CONTACT ── */
-#contact{background:var(--navy2)}
-.contact-wrapper{display:grid;grid-template-columns:1fr 1.2fr;gap:64px;margin-top:64px;align-items:start}
-.contact-info{display:flex;flex-direction:column;gap:24px}
-.contact-intro{color:var(--grey);font-size:16px;line-height:1.7;margin-bottom:8px}
-.contact-item{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;text-decoration:none;transition:all .3s;color:var(--white)}
-.contact-item:hover{border-color:var(--accent2);transform:translateX(6px);background:var(--card2)}
-.contact-item-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.contact-item-text{font-size:14px;color:var(--grey);margin-bottom:2px}
-.contact-item-val{font-size:15px;font-weight:500}
-.social-row{display:flex;gap:12px;margin-top:8px}
-.social-btn{width:44px;height:44px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--grey);text-decoration:none;font-size:20px;transition:all .2s}
-.social-btn:hover{border-color:var(--accent2);color:var(--accent2);background:rgba(93,173,226,.08);transform:translateY(-3px)}
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-ui);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
 
-/* ── FORM ── */
-.contact-form{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:40px}
-.form-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;margin-bottom:28px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-.form-group label{font-size:13px;font-weight:500;color:var(--grey);letter-spacing:.04em}
-.form-group input,.form-group textarea,.form-group select{background:var(--navy2);border:1.5px solid var(--border);border-radius:12px;padding:14px 18px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:15px;outline:none;transition:all .25s;width:100%;resize:none}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent2);box-shadow:0 0 0 3px rgba(93,173,226,.12);background:var(--card2)}
-.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(143,165,188,.5)}
-.form-group select option{background:var(--navy2)}
-.form-group textarea{min-height:130px}
-.form-submit{width:100%;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:12px;padding:16px;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px var(--glow)}
-.form-submit:active{transform:translateY(0)}
-.form-success{display:none;text-align:center;padding:32px;color:var(--accent2)}
-.form-success-icon{font-size:48px;margin-bottom:12px}
+    /* Grid Overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 243, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 243, 255, 0.015) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-/* ── FOOTER ── */
-footer{background:var(--navy);border-top:1px solid var(--border);padding:40px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-copy{color:var(--grey);font-size:14px}
-.footer-copy a{color:var(--accent2);text-decoration:none}
-.footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--grey);font-size:13px;text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--accent2)}
+    /* Scanline overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+      background-size: 100% 4px, 6px 100%;
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.4;
+    }
 
-/* ── MOBILE NAV ── */
-.mobile-nav{display:none;position:fixed;inset:0;background:var(--navy);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:32px}
-.mobile-nav.open{display:flex}
-.mobile-nav a{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:var(--white);text-decoration:none;transition:color .2s}
-.mobile-nav a:hover{color:var(--accent2)}
+    /* ── WebGL Canvas Background ── */
+    #three-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+    }
 
-/* ── ANIMATE ON SCROLL ── */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+    /* ── BOOT UP DIAGNOSTIC SCREEN ── */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background: #020204;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: var(--font-mono);
+      color: var(--cyan-neon);
+      padding: 20px;
+      transition: opacity 0.8s ease-in-out, visibility 0.8s;
+    }
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  nav{padding:16px 24px}
-  .nav-links{display:none}
-  .hamburger{display:flex}
-  #hero{grid-template-columns:1fr;padding:100px 24px 60px;text-align:center}
-  .hero-right{order:-1}
-  .hero-pills{justify-content:center}
-  .hero-actions{justify-content:center}
-  .about-grid,.exp-card,.contact-wrapper,.edu-grid{grid-template-columns:1fr}
-  .projects-grid{grid-template-columns:1fr}
-  .proj-card.featured{grid-column:auto}
-  .skills-container{grid-template-columns:1fr}
-  section{padding:60px 24px}
-  .companies-logos{gap:24px}
-  .form-row{grid-template-columns:1fr}
-  footer{flex-direction:column;text-align:center;padding:32px 24px}
-  .cert-list{grid-template-columns:1fr}
-}
-</style>
+    .boot-container {
+      width: 100%;
+      max-width: 600px;
+      text-align: left;
+    }
+
+    .boot-header {
+      font-family: var(--font-cyber);
+      font-size: 24px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid var(--cyan-neon);
+      padding-bottom: 10px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .boot-logs {
+      font-size: 13px;
+      line-height: 1.8;
+      height: 250px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .boot-line {
+      margin-bottom: 4px;
+      opacity: 0;
+      transform: translateY(5px);
+      animation: bootPrint 0.1s forwards;
+    }
+
+    @keyframes bootPrint {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .boot-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 243, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .boot-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--cyan-neon);
+      width: 0;
+      box-shadow: 0 0 10px var(--cyan-neon);
+      animation: loadProgress 2.2s cubic-bezier(0.1, 0.8, 0.2, 1) forwards;
+    }
+
+    @keyframes loadProgress {
+      to {
+        width: 100%;
+      }
+    }
+
+    /* ── MAIN WORKSPACE LAYOUT ── */
+    .app-container {
+      width: 100%;
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 60px;
+      /* Increased gap to prevent overlap on 3D rotation */
+      align-items: start;
+      position: relative;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 1s cubic-bezier(0.1, 0.8, 0.2, 1), transform 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    .app-container.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ── LEFT PROFILE SIDEBAR ── */
+    .profile-sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 20px;
+      padding: 30px 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      text-align: center;
+      position: sticky;
+      top: 24px;
+      z-index: 100;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .profile-sidebar:hover {
+      border-color: var(--gold-neon);
+      box-shadow: 0 20px 50px rgba(255, 202, 71, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    }
+
+    /* Futuristic Avatar */
+    .avatar-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 24px;
+      cursor: pointer;
+    }
+
+    .avatar-img-box {
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      /* Changed avatar shape to matching rounded rectangle based on feedback */
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.05);
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    .avatar-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .avatar-wrapper:hover .avatar-img-box img {
+      transform: scale(1.1) rotate(2deg);
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 20px;
+      border: 2px dashed var(--gold-neon);
+      z-index: 1;
+      animation: rotateRing 15s linear infinite;
+    }
+
+    .avatar-ring-outer {
+      position: absolute;
+      inset: -12px;
+      border-radius: 24px;
+      border: 1px solid var(--cyan-neon);
+      opacity: 0.3;
+      z-index: 0;
+      animation: pulseOuterRing 3s ease-in-out infinite;
+    }
+
+    @keyframes rotateRing {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulseOuterRing {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.2;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 0.5;
+      }
+    }
+
+    .profile-name {
+      font-family: var(--font-cyber);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+      margin-bottom: 8px;
+    }
+
+    .profile-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gold-neon);
+      height: 20px;
+      font-family: var(--font-mono);
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .profile-title::after {
+      content: '_';
+      animation: flashBlink 0.8s step-end infinite;
+    }
+
+    @keyframes flashBlink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .download-btn-cyber {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold-neon) 0%, #e2ab20 100%);
+      color: #07080d;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: var(--font-cyber);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(255, 202, 71, 0.3);
+      margin-bottom: 24px;
+    }
+
+    .download-btn-cyber:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 202, 71, 0.5);
+    }
+
+    .download-btn-cyber ion-icon {
+      font-size: 16px;
+    }
+
+    /* Sidebar Contacts */
+    .sidebar-sep {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+      margin: 20px 0;
+    }
+
+    .sidebar-contacts {
+      list-style: none;
+      text-align: left;
+    }
+
+    .sidebar-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .contact-icon-box {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan-neon);
+      font-size: 16px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .sidebar-contact-item:hover .contact-icon-box {
+      background: var(--cyan-neon);
+      color: #07080d;
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+
+    .contact-info-text p {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-info-text a,
+    .contact-info-text address {
+      font-size: 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-style: normal;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-info-text a:hover {
+      color: var(--cyan-neon);
+    }
+
+    /* Profile Stats Panel */
+    .sidebar-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .sidebar-stat-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 10px 4px;
+      border-radius: 8px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .sidebar-stat-card:hover {
+      border-color: var(--cyan-neon);
+    }
+
+    .stat-number {
+      font-size: 16px;
+      font-weight: 700;
+      font-family: var(--font-cyber);
+      color: var(--cyan-neon);
+    }
+
+    .stat-label {
+      font-size: 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Social Icons list */
+    .sidebar-socials {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      color: var(--gold-neon);
+      border-color: var(--gold-neon);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+
+    /* ── RIGHT CONSOLE VIEWPORT (3D PERSPECTIVE) ── */
+    .console-section {
+      width: 100%;
+      position: relative;
+    }
+
+    /* Cyber Navigation Header */
+    .cyber-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
+      padding: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 6px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      flex-grow: 1;
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-cyber);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-tab-btn::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 2px;
+      background: var(--gold-neon);
+      transition: width 0.3s;
+    }
+
+    .nav-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-tab-btn.active {
+      color: var(--gold-neon);
+      background: rgba(255, 202, 71, 0.08);
+      box-shadow: inset 0 0 8px rgba(255, 202, 71, 0.05);
+    }
+
+    .nav-tab-btn.active::before {
+      width: 60%;
+    }
+
+    /* Link back to classic */
+    .classic-link-btn {
+      background: rgba(0, 243, 255, 0.06);
+      border: 1px solid rgba(0, 243, 255, 0.2);
+      color: var(--cyan-neon);
+      text-decoration: none;
+      font-family: var(--font-cyber);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 10px 16px;
+      border-radius: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .classic-link-btn:hover {
+      background: var(--cyan-neon);
+      color: #07080d;
+      box-shadow: 0 0 12px var(--cyan-neon);
+      transform: translateY(-1px);
+    }
+
+    /* 3D Viewport Container */
+    .deck-viewport {
+      width: 100%;
+      height: var(--panel-height);
+      perspective: 1600px;
+      perspective-origin: 50% 30%;
+      position: relative;
+      overflow: visible;
+    }
+
+    /* 3D Panel Ring/Cylinder Parent */
+    .panel-cube-ring {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      transform-style: preserve-3d;
+      transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      /* Centers rotation point at distance of translation Z behind the viewport plane */
+      transform: translateZ(calc(-1 * var(--translate-z))) rotateY(0deg);
+    }
+
+    /* Hologram Panel Face */
+    .hologram-panel {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--panel-width);
+      height: var(--panel-height);
+      margin-left: calc(-1 * var(--panel-width) / 2);
+      margin-top: calc(-1 * var(--panel-height) / 2);
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.03);
+      border-radius: 24px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 34px;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform-style: preserve-3d;
+      opacity: 0.03;
+      /* FIX 2: Disable mouse pointer capture for inactive panels so they do not block active wheel events */
+      pointer-events: none;
+      transition: opacity 1s, border-color 0.4s, box-shadow 0.4s;
+    }
+
+    /* Active focused panel style */
+    .hologram-panel.focused {
+      opacity: 1;
+      /* FIX 2: Re-enable pointer events for the focused panel to allow mouse wheel scroll and click */
+      pointer-events: auto;
+      border-color: rgba(255, 202, 71, 0.4);
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.7),
+        inset 0 1px 2px rgba(255, 255, 255, 0.05),
+        0 0 30px rgba(255, 202, 71, 0.05);
+    }
+
+    /* 3D Ring Positions (6 face ring - 60 deg increments) */
+    .hologram-panel:nth-child(1) {
+      transform: rotateY(0deg) translateZ(var(--translate-z));
+    }
+
+    .hologram-panel:nth-child(2) {
+      transform: rotateY(60deg) translateZ(var(--translate-z));
+    }
+
+    .hologram-panel:nth-child(3) {
+      transform: rotateY(120deg) translateZ(var(--translate-z));
+    }
+
+    .hologram-panel:nth-child(4) {
+      transform: rotateY(180deg) translateZ(var(--translate-z));
+    }
+
+    .hologram-panel:nth-child(5) {
+      transform: rotateY(240deg) translateZ(var(--translate-z));
+    }
+
+    .hologram-panel:nth-child(6) {
+      transform: rotateY(300deg) translateZ(var(--translate-z));
+    }
+
+    /* Panel Content Styling */
+    .panel-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-title {
+      font-family: var(--font-cyber);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .panel-title ion-icon {
+      color: var(--gold-neon);
+      filter: drop-shadow(0 0 5px var(--gold-glow));
+    }
+
+    .panel-meta-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--cyan-neon);
+      background: rgba(0, 243, 255, 0.08);
+      border: 1px solid rgba(0, 243, 255, 0.15);
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── PANEL 1: ABOUT SCREEN ── */
+    .about-lead-para {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-main);
+      margin-bottom: 20px;
+    }
+
+    .about-lead-para strong {
+      color: var(--gold-neon);
+    }
+
+    .about-sub-para {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .worked-with-h3 {
+      font-family: var(--font-cyber);
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    /* Horizontal list of company logos */
+    .brand-carousel-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 8px 16px;
+      border-radius: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .brand-badge:hover {
+      border-color: var(--gold-neon);
+      background: rgba(255, 202, 71, 0.04);
+      color: var(--gold-neon);
+      transform: translateY(-2px);
+    }
+
+    .brand-badge img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      border-radius: 3px;
+    }
+
+
+    /* ── PANEL 2: EXPERIENCE TIMELINE ── */
+    .timeline-container {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--gold-neon), rgba(255, 202, 71, 0.05));
+    }
+
+    .timeline-item-cyber {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item-cyber::before {
+      content: '';
+      position: absolute;
+      left: -24px;
+      top: 5px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #07080d;
+      border: 2px solid var(--gold-neon);
+      box-shadow: 0 0 8px var(--gold-neon);
+      transition: all 0.3s;
+    }
+
+    .timeline-item-cyber:hover::before {
+      background: var(--cyan-neon);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 10px var(--cyan-neon);
+    }
+
+    .timeline-header-cyber {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .timeline-title-text h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .timeline-title-text p {
+      font-size: 11px;
+      color: var(--gold-neon);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .timeline-date-cyber {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--cyan-neon);
+      background: rgba(0, 243, 255, 0.06);
+      border: 1px solid rgba(0, 243, 255, 0.1);
+      padding: 2px 10px;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+
+    .timeline-desc-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .timeline-desc-list li {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .timeline-desc-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--gold-neon);
+      font-weight: 700;
+    }
+
+    .timeline-desc-list li strong {
+      color: var(--text-main);
+    }
+
+
+    /* ── PANEL 3: EDUCATION & EXTRA-CURRICULARS ── */
+    .edu-grid-cyber {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .edu-card-cyber {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 14px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card-cyber:hover {
+      border-color: var(--gold-neon);
+    }
+
+    .edu-year-lbl {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--gold-neon);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .edu-degree-lbl {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .edu-school-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .edu-grade-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--cyan-neon);
+      background: rgba(0, 243, 255, 0.06);
+      border: 1px solid rgba(0, 243, 255, 0.1);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .edu-details-txt {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .cert-grid-cyber {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .cert-item-cyber {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      padding: 10px 14px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-name-lbl {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #fff;
+    }
+
+    .cert-issuer-lbl {
+      font-size: 9.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+
+    /* ── PANEL 4: SKILLS GAUGES ── */
+    .skills-grid-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .skills-console-card {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .skills-console-title {
+      font-family: var(--font-cyber);
+      font-size: 11px;
+      color: #fff;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-bottom: 6px;
+    }
+
+    .skills-item-cyber {
+      margin-bottom: 12px;
+    }
+
+    .skills-item-cyber:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-item-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .skills-item-label span:first-child {
+      color: var(--text-main);
+    }
+
+    .skills-item-label span:last-child {
+      color: var(--gold-neon);
+      font-family: var(--font-mono);
+    }
+
+    .skills-progress-bg-cyber {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .skills-progress-fill-cyber {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-neon), #e2ab20);
+      width: 0%;
+      border-radius: 3px;
+      transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    /* Detailed Skills Scroll Box */
+    .detailed-skills-scroll-box {
+      font-size: 11.5px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(255, 255, 255, 0.08);
+      padding-top: 14px;
+      margin-top: 10px;
+    }
+
+    .detailed-skills-scroll-box strong {
+      color: var(--gold-neon);
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+
+    /* ── PANEL 5: PROJECTS DECK ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .project-card-cyber {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card-cyber::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--cyan-neon);
+      transition: height 0.3s;
+    }
+
+    .project-card-cyber:hover {
+      border-color: rgba(0, 243, 255, 0.15);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 243, 255, 0.04);
+    }
+
+    .project-card-cyber:hover::before {
+      height: 100%;
+    }
+
+    .project-info-cyber h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .project-info-cyber h4 a {
+      color: inherit;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .project-info-cyber h4 a:hover {
+      color: var(--cyan-neon);
+    }
+
+    .project-date-lbl {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .project-desc-cyber {
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .project-tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: auto;
+    }
+
+    .tech-badge-cyber {
+      font-family: var(--font-mono);
+      font-size: 8.5px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+
+    /* ── PANEL 6: BLOG & SECURITY UPLINK ── */
+    .blog-contact-split {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 20px;
+    }
+
+    .blog-posts-cyber-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blog-post-card-cyber {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background-color 0.2s;
+    }
+
+    .blog-post-card-cyber:hover {
+      border-color: var(--gold-neon);
+      background-color: rgba(255, 202, 71, 0.02);
+    }
+
+    .blog-img-box {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #111;
+    }
+
+    .blog-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blog-content-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .blog-meta-tags {
+      display: flex;
+      gap: 6px;
+      font-size: 8.5px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .blog-category-tag {
+      color: var(--gold-neon);
+      font-weight: 500;
+    }
+
+    .blog-title-lbl {
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .contact-form-cyber {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cyber-input-wrapper {
+      position: relative;
+    }
+
+    .cyber-input-wrapper ion-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+
+    .cyber-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 14px 10px 42px;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      outline: none;
+      transition: all 0.3s;
+    }
+
+    .cyber-input:focus {
+      border-color: var(--gold-neon);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .cyber-input:focus+ion-icon {
+      color: var(--gold-neon);
+    }
+
+    select.cyber-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 14px;
+    }
+
+    .cyber-textarea {
+      width: 100%;
+      min-height: 80px;
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      outline: none;
+      resize: vertical;
+      transition: all 0.3s;
+    }
+
+    .cyber-textarea:focus {
+      border-color: var(--gold-neon);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    .cyber-submit-btn {
+      background: rgba(255, 202, 71, 0.1);
+      border: 1px solid var(--gold-neon);
+      color: var(--gold-neon);
+      font-family: var(--font-cyber);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .cyber-submit-btn:hover:not(:disabled) {
+      background: var(--gold-neon);
+      color: #07080d;
+      box-shadow: 0 0 12px var(--gold-neon);
+    }
+
+    .cyber-submit-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    #form-status-msg {
+      font-size: 11px;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* Hobbies logs list */
+    .recreational-title {
+      font-family: var(--font-cyber);
+      font-size: 12px;
+      color: #fff;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 4px;
+    }
+
+    .hobbies-cyber-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .hobby-card-cyber {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .hobby-card-cyber:hover {
+      border-color: var(--cyan-neon);
+    }
+
+    .hobby-icon {
+      font-size: 16px;
+      color: var(--cyan-neon);
+      background: rgba(0, 243, 255, 0.06);
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hobby-info h5 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+
+    .hobby-info p {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+
+    /* ── CAROUSEL ARROWS ── */
+    .carousel-arrow {
+      position: absolute;
+      top: 55%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glow);
+      border-radius: 50%;
+      color: var(--gold-neon);
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: all 0.3s;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .carousel-arrow:hover {
+      background: var(--gold-neon);
+      color: #07080d;
+      box-shadow: 0 0 15px var(--gold-neon);
+    }
+
+    .arrow-left {
+      left: -60px;
+    }
+
+    .arrow-right {
+      right: -60px;
+    }
+
+    /* ── FIX 2: HUD DIRECTIONAL D-PAD CONTROLLER ── */
+    .hud-dpad {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 110px;
+      height: 110px;
+      background: rgba(14, 18, 30, 0.9);
+      border: 2px solid var(--border-glow);
+      border-radius: 50%;
+      display: grid;
+      grid-template-areas:
+        ". up ."
+        "left center right"
+        ". down .";
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      align-items: center;
+      justify-items: center;
+      z-index: 999;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 243, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .hud-dpad:hover {
+      border-color: var(--cyan-neon);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 20px var(--cyan-glow);
+    }
+
+    .dpad-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 16px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dpad-btn:hover {
+      color: var(--cyan-neon);
+      text-shadow: 0 0 8px var(--cyan-glow);
+    }
+
+    .dpad-btn:active {
+      transform: scale(0.85);
+    }
+
+    .dpad-up {
+      grid-area: up;
+    }
+
+    .dpad-down {
+      grid-area: down;
+    }
+
+    .dpad-left {
+      grid-area: left;
+    }
+
+    .dpad-right {
+      grid-area: right;
+    }
+
+    .dpad-center {
+      grid-area: center;
+      font-family: var(--font-cyber);
+      font-size: 8px;
+      font-weight: 700;
+      color: var(--gold-neon);
+      text-shadow: 0 0 5px var(--gold-glow);
+      letter-spacing: 0.5px;
+      pointer-events: none;
+    }
+
+
+    /* ── RESPONSIVENESS (MOBILE FRIENDLY) ── */
+    @media (max-width: 1400px) {
+      .arrow-left {
+        left: -10px;
+      }
+
+      .arrow-right {
+        right: -10px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .app-container {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 30px;
+      }
+
+      .profile-sidebar {
+        position: relative;
+        top: 0;
+        margin-bottom: 20px;
+      }
+
+      .carousel-arrow {
+        display: none;
+        /* Hide arrows on smaller viewports, navigation links are enough */
+      }
+
+      .hud-dpad {
+        bottom: 12px;
+        right: 12px;
+        width: 90px;
+        height: 90px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 992px) {
+
+      /* Adapt the 3D transforms to behave like a standard sliding panel setup on mobile to avoid cutoffs */
+      :root {
+        --panel-width: 94vw;
+        --panel-height: auto;
+      }
+
+      .deck-viewport {
+        height: auto;
+        perspective: none;
+        overflow: hidden;
+      }
+
+      .panel-cube-ring {
+        position: relative;
+        transform-style: flat;
+        transition: none;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transform: none !important;
+      }
+
+      .hologram-panel {
+        position: relative;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        margin-left: 0;
+        margin-top: 0;
+        opacity: 0;
+        display: none;
+        transform: none !important;
+        transition: opacity 0.5s ease;
+        pointer-events: auto;
+      }
+
+      .hologram-panel.focused {
+        opacity: 1;
+        display: block;
+      }
+
+      .blog-contact-split {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-grid-cyber {
+        grid-template-columns: 1fr;
+      }
+
+      .cert-grid-cyber {
+        grid-template-columns: 1fr;
+      }
+
+      .hobbies-cyber-list {
+        grid-template-columns: 1fr;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cyber-nav {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-tabs {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .nav-tab-btn {
+        font-size: 9px;
+        padding: 8px 10px;
+      }
+
+      .profile-sidebar {
+        padding: 20px 14px;
+      }
+
+      .sidebar-stats {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
+  <!-- Background Canvas for Three.js 3D particles & molecules -->
+  <canvas id="three-bg"></canvas>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav" id="mobileNav">
-  <a href="#hero" onclick="closeMobileNav()">Home</a>
-  <a href="#about" onclick="closeMobileNav()">About</a>
-  <a href="#experience" onclick="closeMobileNav()">Experience</a>
-  <a href="#projects" onclick="closeMobileNav()">Projects</a>
-  <a href="#skills" onclick="closeMobileNav()">Skills</a>
-  <a href="#contact" onclick="closeMobileNav()">Contact</a>
-</div>
-
-<!-- NAV -->
-<nav id="navbar">
-  <a class="nav-logo" href="#hero">Sohan<span>.</span></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#education">Education</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
-  </ul>
-  <div class="hamburger" id="hamburger" onclick="toggleMobileNav()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-bg-glow"></div>
-  <div class="hero-left">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      Available for opportunities · APAC &amp; Global
-    </div>
-    <h1 class="hero-name">Sohan Lal<br><span class="line2">Kushwaha</span></h1>
-    <p class="hero-tagline">
-      <strong>Business Development Executive</strong> at Genedrift · <strong>Regulatory Affairs</strong> · Founder of <strong>Pharmalite Ecosystem</strong> · Pharma-AI Builder
-    </p>
-    <div class="hero-pills">
-      <span class="pill">🌏 APAC &amp; Africa</span>
-      <span class="pill">⚗️ Regulatory Affairs</span>
-      <span class="pill">🤖 AI Builder</span>
-      <span class="pill">🎓 B.Pharm</span>
-      <span class="pill">🐍 Python · JS · PHP</span>
-    </div>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">💬 Let's Connect</a>
-      <a href="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/docs/Sohan_Lal_Resume.pdf" target="_blank" class="btn-outline">📄 Resume</a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-ring"></div>
-      <img class="hero-photo" src="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/images/my-avatar.png" alt="Sohan Lal Kushwaha" onerror="this.src='https://ui-avatars.com/api/?name=Sohan+Lal&background=1a5276&color=fff&size=280'">
-    </div>
-    <div class="hero-stats">
-      <div class="stat-card">
-        <div class="stat-num" data-count="400">0</div>
-        <div class="stat-label">Projects Closed+</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">5M+</div>
-        <div class="stat-label">Students Reached</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" data-count="200">0</div>
-        <div class="stat-label">Clients Managed+</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" data-count="12">0</div>
-        <div class="stat-label">K+ YT Subscribers</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label">About Me</div>
-  <h2 class="section-title">Pharma meets<br>Technology</h2>
-  <div class="about-grid reveal">
-    <div class="about-text">
-      <p>I'm currently working as a <strong>Business Development Executive at Genedrift</strong>, where I manage international pharma projects across APAC and African markets — closing 400+ projects, handling 200+ clients, and building AI-driven sales automation systems using Python, JavaScript, and PHP.</p>
-      <p>Alongside BD, I bring hands-on experience from my time as a <strong>Regulatory Affairs Trainee</strong> — reviewing 100+ dossiers, 400+ product artworks, eCTD compilation, GMP/GVP compliance, and supporting pharmaceutical and medical device registrations across <strong>Philippines, Myanmar, Thailand, and Vietnam</strong>.</p>
-      <p>Before joining Genedrift — and still running in parallel — I founded the <strong>Pharmalite ecosystem</strong> during my college years: starting with a 13,000-student survey that confirmed the gap in pharmacy education, now serving <strong>5 million+ students</strong> across India through Pharmalite, PharmaJobs, and PharmaChat AI.</p>
-      <p>Academically, my B.Pharm research focused on <strong>AI in drug discovery</strong> — QSAR modeling, PBPK simulation, and ADMET prediction — presented at <strong>NPPRD 2023 International Conference</strong>.</p>
-    </div>
-    <div class="about-highlights">
-      <div class="highlight-card">
-        <div class="highlight-icon">🌏</div>
-        <div class="highlight-title">APAC & Africa Market Expert</div>
-        <div class="highlight-desc">Philippines, Myanmar, Vietnam, Thailand, and multiple African markets — regulatory navigation and market entry strategy.</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-icon">🤖</div>
-        <div class="highlight-title">AI & Automation Builder</div>
-        <div class="highlight-desc">Built AI-powered lead generation, PharmaChat AI (100% pharmacology accuracy), PharmaPredict AI (ADMET prediction), and automated sales pipelines.</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-icon">⚗️</div>
-        <div class="highlight-title">Regulatory Affairs Professional</div>
-        <div class="highlight-desc">eCTD dossiers, GMP/GVP, ICH & ASEAN guidelines, pharmacovigilance, ICSR reporting, and medical device registrations.</div>
-      </div>
-      <div class="highlight-card">
-        <div class="highlight-icon">🚀</div>
-        <div class="highlight-title">Pharma Entrepreneur</div>
-        <div class="highlight-desc">Founder of Pharmalite (5M+ students), PharmaJobs (5K+ applications), and PharmaChat AI — all built during college.</div>
+  <!-- DIAGNOSTIC BOOT UP INTERFACE -->
+  <div id="boot-screen">
+    <div class="boot-container">
+      <div class="boot-header">NEURAL RESUME CONSOLE V2.4</div>
+      <div class="boot-logs" id="boot-logs"></div>
+      <div class="boot-progress-bar">
+        <div class="boot-progress-fill"></div>
       </div>
     </div>
   </div>
 
-  <!-- Companies strip -->
-  <div class="companies-strip reveal">
-    <p class="companies-title">Worked with &amp; built for</p>
-    <div class="companies-logos">
-      <div class="company-logo-item">
-        <div class="company-logo-box">
-          <img src="https://genedrift.com/favicon.ico" alt="Genedrift" onerror="this.parentElement.innerHTML='<span class=\'company-logo-text-badge\'>genedrift</span>'">
+  <!-- MAIN APP WRAPPER -->
+  <div class="app-container" id="app-root">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="profile-sidebar">
+
+      <div class="avatar-wrapper">
+        <div class="avatar-img-box">
+          <img src="./assets/images/my-avatar.png" alt="Sohan Lal Kushwaha">
         </div>
-        <span class="company-name-label">Genedrift</span>
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring-outer"></div>
       </div>
-      <div class="company-logo-item">
-        <div class="company-logo-box">
-          <img src="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/images/logo.ico" alt="Pharmalite" onerror="this.parentElement.innerHTML='<span class=\'company-logo-text-badge\'>Pharmalite</span>'">
-        </div>
-        <span class="company-name-label">Pharmalite</span>
-      </div>
-      <div class="company-logo-item">
-        <div class="company-logo-box" style="font-family:'Syne',sans-serif;font-weight:800;font-size:10px;color:var(--accent2);text-align:center;padding:6px">PharmaJobs</div>
-        <span class="company-name-label">PharmaJobs</span>
-      </div>
-      <div class="company-logo-item">
-        <div class="company-logo-box" style="font-family:'Syne',sans-serif;font-weight:800;font-size:10px;color:var(--accent2);text-align:center;padding:6px">PharmaChat AI</div>
-        <span class="company-name-label">PharmaChat AI</span>
-      </div>
-      <div class="company-logo-item">
-        <div class="company-logo-box" style="font-family:'Syne',sans-serif;font-weight:800;font-size:9px;color:var(--accent2);text-align:center;padding:6px">Bundelkhand Univ.</div>
-        <span class="company-name-label">Bundelkhand Univ.</span>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="section-label">Experience</div>
-  <h2 class="section-title">Professional<br>Journey</h2>
-  <div class="exp-grid">
+      <h1 class="profile-name">Sohan Lal Kushwaha</h1>
+      <div class="profile-title" id="cyber-title">BD Executive</div>
 
-    <div class="exp-card reveal">
-      <div class="exp-logo">
-        <img src="https://genedrift.com/favicon.ico" alt="Genedrift" onerror="this.parentElement.innerHTML='<div class=\'exp-logo-text\'>gene<br>drift</div>'">
-      </div>
-      <div>
-        <div class="exp-header">
-          <div class="exp-title">Business Development Executive</div>
-          <div class="exp-date">Feb 2025 – Present</div>
+      <a href="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/docs/Sohan_Lal_Resume.pdf" target="_blank"
+        class="download-btn-cyber">
+        <ion-icon name="cloud-download-outline"></ion-icon>
+        <span>Download PDF</span>
+      </a>
+
+      <div class="sidebar-sep"></div>
+
+      <!-- Contacts List -->
+      <ul class="sidebar-contacts">
+
+        <li class="sidebar-contact-item">
+          <div class="contact-icon-box">
+            <ion-icon name="mail-outline"></ion-icon>
+          </div>
+          <div class="contact-info-text">
+            <p>Direct Comms</p>
+            <a href="mailto:sohanlalkush@hotmail.com">sohanlalkush@hotmail.com</a>
+          </div>
+        </li>
+
+        <li class="sidebar-contact-item">
+          <div class="contact-icon-box">
+            <ion-icon name="phone-portrait-outline"></ion-icon>
+          </div>
+          <div class="contact-info-text">
+            <p>Comms Frequency</p>
+            <a href="tel:+918127246983">+91 81272 46983</a>
+          </div>
+        </li>
+
+        <li class="sidebar-contact-item">
+          <div class="contact-icon-box">
+            <ion-icon name="location-outline"></ion-icon>
+          </div>
+          <div class="contact-info-text">
+            <p>Coordinates</p>
+            <address>Kanpur, UP, India</address>
+          </div>
+        </li>
+
+        <li class="sidebar-contact-item">
+          <div class="contact-icon-box">
+            <ion-icon name="globe-outline"></ion-icon>
+          </div>
+          <div class="contact-info-text">
+            <p>System Domain</p>
+            <a href="https://sohanlal.pharmalite.in" target="_blank">sohanlal.pharmalite.in</a>
+          </div>
+        </li>
+
+      </ul>
+
+      <div class="sidebar-sep"></div>
+
+      <!-- Stats row -->
+      <div class="sidebar-stats">
+        <div class="sidebar-stat-card">
+          <div class="stat-number" data-count="400">0</div>
+          <div class="stat-label">Projects Closed</div>
         </div>
-        <div class="exp-company">Genedrift</div>
-        <div class="exp-location">📍 Mumbai, India · Hybrid</div>
-        <ul class="exp-bullets">
-          <li>Achieved <strong>peak monthly revenue of six-figure USD</strong> milestone, consistently exceeding targets through strategic client acquisition and AI-driven automation.</li>
-          <li>Closed <strong>400+ international projects</strong>; managed 30+ active projects and <strong>200+ client portfolio</strong> across APAC and African markets.</li>
-          <li>Guided <strong>20+ Indian manufacturers</strong> through market entry into Philippines, Myanmar, Vietnam, and other APAC markets.</li>
-          <li>Engineered <strong>3 SOPs</strong>: Lead Intelligence, Opportunity Management, and After-Sales Operations.</li>
-          <li>Architected <strong>AI-powered lead generation systems</strong> using Python, JavaScript, and PHP with web scraping and CRM enrichment pipelines.</li>
-          <li>Managed end-to-end <strong>Zoho CRM operations</strong> across 200+ accounts; trained and mentored 3 sales trainees.</li>
+        <div class="sidebar-stat-card">
+          <div class="stat-number">5M+</div>
+          <div class="sidebar-stat-label">Students Reached</div>
+        </div>
+        <div class="sidebar-stat-card">
+          <div class="stat-number" data-count="200">0</div>
+          <div class="sidebar-stat-label">Clients</div>
+        </div>
+      </div>
+
+      <div class="sidebar-sep"></div>
+
+      <!-- Socials -->
+      <ul class="sidebar-socials">
+        <li>
+          <a href="https://in.linkedin.com/in/sohanlalkush" class="social-btn" target="_blank">
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/sohanlalkush" class="social-btn" target="_blank">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/sohanlal.kushwaha.1" class="social-btn" target="_blank">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/@pharmalite" class="social-btn" target="_blank">
+            <ion-icon name="logo-youtube"></ion-icon>
+          </a>
+        </li>
+      </ul>
+
+    </aside>
+
+    <!-- RIGHT 3D CONSOLE -->
+    <main class="console-section">
+
+      <!-- Navigation Tabs (6-panel navigation) -->
+      <nav class="cyber-nav">
+        <ul class="nav-tabs">
+          <li>
+            <button class="nav-tab-btn active" data-index="0">
+              <ion-icon name="person-outline"></ion-icon>
+              <span>Profile</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-index="1">
+              <ion-icon name="git-branch-outline"></ion-icon>
+              <span>Timeline</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-index="2">
+              <ion-icon name="book-outline"></ion-icon>
+              <span>Academia</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-index="3">
+              <ion-icon name="construct-outline"></ion-icon>
+              <span>Matrix</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-index="4">
+              <ion-icon name="flask-outline"></ion-icon>
+              <span>Projects</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-tab-btn" data-index="5">
+              <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+              <span>Blog &amp; Comms</span>
+            </button>
+          </li>
         </ul>
-      </div>
-    </div>
+        <a href="./basic.html" class="classic-link-btn">
+          <ion-icon name="desktop-outline"></ion-icon>
+          <span>Classic Style</span>
+        </a>
+      </nav>
 
-    <div class="exp-card reveal">
-      <div class="exp-logo">
-        <img src="https://genedrift.com/favicon.ico" alt="Genedrift" onerror="this.parentElement.innerHTML='<div class=\'exp-logo-text\'>gene<br>drift</div>'">
-      </div>
-      <div>
-        <div class="exp-header">
-          <div class="exp-title">Drug Regulatory Affairs Trainee</div>
-          <div class="exp-date">Sep 2024 – Feb 2025</div>
-        </div>
-        <div class="exp-company">Genedrift</div>
-        <div class="exp-location">📍 Dehradun, India · Remote</div>
-        <ul class="exp-bullets">
-          <li>Compiled <strong>10+ eCTD dossiers</strong> and <strong>30+ APAC-format dossiers</strong> for Philippines, Myanmar, Thailand, and Vietnam.</li>
-          <li>Reviewed <strong>100+ regulatory dossiers</strong> and <strong>400+ product artworks</strong> for compliance.</li>
-          <li>Evaluated <strong>10+ Bioequivalence studies</strong>; reviewed 10+ site documents for GMP inspection readiness.</li>
-          <li>Hands-on <strong>ICSR preparation, Signal Detection, and GVP compliance</strong>.</li>
-          <li>Trained <strong>5 junior regulatory trainees</strong> in dossier preparation and APAC submission protocols.</li>
-        </ul>
-      </div>
-    </div>
+      <!-- Carousel Viewport -->
+      <div class="deck-viewport">
 
-    <div class="exp-card reveal">
-      <div class="exp-logo">
-        <img src="https://cdn.jsdelivr.net/gh/Sohanlalkush/Sohan_Lal/assets/images/logo.ico" alt="Pharmalite" onerror="this.parentElement.innerHTML='<div class=\'exp-logo-text\'>Pharma<br>lite</div>'">
-      </div>
-      <div>
-        <div class="exp-header">
-          <div class="exp-title">Founder</div>
-          <div class="exp-date">Jan 2022 – Present</div>
+        <div class="panel-cube-ring" id="panel-cube-ring">
+
+          <!-- PANEL 1: ABOUT ME -->
+          <article class="hologram-panel focused">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="finger-print-outline"></ion-icon>
+                <span>Hologram Profile</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_01 // OVERVIEW</span>
+            </div>
+
+            <p class="about-lead-para">
+              Results-driven <strong>Business Development Executive at Genedrift</strong> with hands-on experience in
+              international pharma sales, regulatory dossier management, and AI-driven automation. Closed <strong>400+
+                international projects</strong> across APAC and African markets, managed <strong>200+ clients</strong>,
+              and built AI-powered lead generation pipelines from scratch.
+            </p>
+
+            <p class="about-sub-para">
+              Background spans end-to-end <strong>regulatory affairs</strong> across Philippines, Myanmar, Vietnam, and
+              Thailand — eCTD compilation, GMP/GVP compliance, artwork review, and pharmacovigilance. Founder of the
+              <strong>Pharmalite ecosystem</strong> — education, jobs, and AI platform serving <strong>5 million+
+                pharmacy
+                students</strong> across India. Proficient in Python, JavaScript, PHP, and Node.js.
+            </p>
+
+            <h3 class="worked-with-h3">Affiliated Platforms & Entities</h3>
+            <div class="brand-carousel-strip">
+              <a href="https://genedrift.com" target="_blank" class="brand-badge">
+                <img src="https://genedrift.com/files/Logo%20-%20Smaller%20Size.jpg" alt="Genedrift">
+                <span>Genedrift</span>
+              </a>
+              <a href="https://pharmalite.in" target="_blank" class="brand-badge">
+                <img src="./assets/images/logo-1-color.png" alt="Pharmalite">
+                <span>Pharmalite</span>
+              </a>
+              <a href="https://jobs.pharmalite.in" target="_blank" class="brand-badge">
+                <img src="./assets/images/pharmajobs.png" alt="PharmaJobs">
+                <span>PharmaJobs</span>
+              </a>
+              <a href="https://ai.pharmalite.in" target="_blank" class="brand-badge">
+                <img src="./assets/images/logo-4-color.png" alt="PharmaChat AI">
+                <span>PharmaChat AI</span>
+              </a>
+              <a href="https://www.facebook.com/Medicofact.in/" target="_blank" class="brand-badge">
+                <img src="./assets/images/logo-3-color.png" alt="Medicofact">
+                <span>Medicofact</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- PANEL 2: TIMELINE (EXPERIENCE) -->
+          <article class="hologram-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="git-merge-outline"></ion-icon>
+                <span>Mission Logbook</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_02 // EXPERIENCE</span>
+            </div>
+
+            <div class="timeline-container">
+
+              <div class="timeline-item-cyber">
+                <div class="timeline-header-cyber">
+                  <div class="timeline-title-text">
+                    <h4>Business Development Executive (Commercial Services)</h4>
+                    <p>Genedrift · Mumbai, India (Hybrid)</p>
+                  </div>
+                  <span class="timeline-date-cyber">Feb 2025 – Present</span>
+                </div>
+                <ul class="timeline-desc-list">
+                  <li>Achieved peak monthly revenue of <strong>six-figure USD</strong> milestone, consistently exceeding
+                    targets through strategic client acquisition and AI-driven automation.</li>
+                  <li>Closed <strong>400+ international projects</strong>; managed 30+ active projects and <strong>200+
+                      client portfolio</strong> across APAC and African markets.</li>
+                  <li>Guided <strong>20+ Indian manufacturers</strong> through market entry into Philippines, Myanmar,
+                    Vietnam, and other APAC markets — resolving regulatory and logistical hurdles.</li>
+                  <li>Engineered <strong>3 SOPs</strong>: Lead Intelligence, Opportunity Management, and After-Sales
+                    Operations to standardize the commercial lifecycle.</li>
+                  <li>Architected <strong>AI-powered lead generation</strong> systems using Python, JavaScript, PHP with
+                    web scraping and Zoho CRM pipelines.</li>
+                  <li>Trained and mentored <strong>3 sales trainees</strong> in prospecting, CRM usage, and business
+                    communication.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item-cyber">
+                <div class="timeline-header-cyber">
+                  <div class="timeline-title-text">
+                    <h4>Drug Regulatory Affairs Trainee</h4>
+                    <p>Genedrift · Dehradun, India (Remote)</p>
+                  </div>
+                  <span class="timeline-date-cyber">Sep 2024 – Feb 2025</span>
+                </div>
+                <ul class="timeline-desc-list">
+                  <li>Compiled <strong>10+ eCTD dossiers</strong> and <strong>30+ APAC-format registration
+                      dossiers</strong> for Philippines, Myanmar, Thailand, and Vietnam.</li>
+                  <li>Reviewed <strong>100+ regulatory dossiers</strong> and <strong>400+ product artworks</strong> for
+                    compliance with local requirements.</li>
+                  <li>Evaluated <strong>10+ Bioequivalence (BE) studies</strong>; reviewed 10+ site documents for GMP
+                    compliance and inspection readiness.</li>
+                  <li>Applied GMP and GVP standards throughout dossier preparation; gained hands-on ICSR and Signal
+                    Detection experience.</li>
+                  <li>Trained <strong>5 junior regulatory trainees</strong> in dossier preparation and APAC submission
+                    protocols.</li>
+                </ul>
+              </div>
+
+              <div class="timeline-item-cyber">
+                <div class="timeline-header-cyber">
+                  <div class="timeline-title-text">
+                    <h4>Founder</h4>
+                    <p>Pharmalite · Kanpur, India</p>
+                  </div>
+                  <span class="timeline-date-cyber">Jan 2022 – Present</span>
+                </div>
+                <ul class="timeline-desc-list">
+                  <li>Founded Pharmalite during first year of B.Pharm after a <strong>13,000-student survey</strong>;
+                    now serves <strong>5 million+ pharmacy students</strong> across India.</li>
+                  <li>Built <strong>PharmaChat AI</strong> — multi-module healthcare assistant achieving <strong>100%
+                      pharmacology accuracy</strong>; accessible via web and WhatsApp.</li>
+                  <li>Launched <strong>PharmaJobs</strong> (jobs.pharmalite.in) — niche pharma job portal processing
+                    <strong>5,000+ applications</strong> with AI fraud detection.
+                  </li>
+                  <li>Developed <strong>PharmaPredict AI</strong> — ML platform for ADMET prediction and SAR molecular
+                    activity screening.</li>
+                  <li>Grew YouTube community to <strong>12,000+ subscribers</strong>; hosted 10+ live expert academic
+                    sessions.</li>
+                </ul>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PANEL 3: EDUCATION & ACADEMIA -->
+          <article class="hologram-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="book-outline"></ion-icon>
+                <span>Academic Logs & Certifications</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_03 // ACADEMICS</span>
+            </div>
+
+            <!-- Education Grid -->
+            <div class="edu-grid-cyber">
+
+              <div class="edu-card-cyber">
+                <div class="edu-year-lbl">2020 – 2024</div>
+                <div class="edu-degree-lbl">Bachelor of Pharmacy (B.Pharm)</div>
+                <div class="edu-school-lbl">Bundelkhand University, Jhansi</div>
+                <div class="edu-grade-badge">Grade A (75%)</div>
+                <div class="edu-details-txt">
+                  Major project: <em>Integrating AI in Pharma: Revolutionizing Drug Discovery and Formulation</em>.
+                  Poster presenter at NPPRD 2023. Founded Pharmalite during college.
+                </div>
+              </div>
+
+              <div class="edu-card-cyber">
+                <div class="edu-year-lbl">2016 – 2017</div>
+                <div class="edu-degree-lbl">Intermediate (XII)</div>
+                <div class="edu-school-lbl">Rohan Singh Inter College, Kanpur</div>
+                <div class="edu-grade-badge">Grade A</div>
+                <div class="edu-details-txt">Passed Senior Secondary School Examination with distinction. Focus on
+                  Physics, Chemistry, and Biology.</div>
+              </div>
+
+              <div class="edu-card-cyber" style="grid-column: span 2;">
+                <div class="edu-year-lbl">2014 – 2015</div>
+                <div class="edu-degree-lbl">High School (X)</div>
+                <div class="edu-school-lbl">Rohan Singh Inter College, Kanpur</div>
+                <div class="edu-grade-badge">First Division (68%)</div>
+                <div class="edu-details-txt">Passed Higher Secondary School Examination under Board of High School and
+                  Intermediate Education, UP.</div>
+              </div>
+
+            </div>
+
+            <h3 class="worked-with-h3" style="margin-bottom: 12px;">Certifications</h3>
+            <div class="cert-grid-cyber">
+              <div class="cert-item-cyber">
+                <span class="cert-name-lbl">Drug Discovery</span>
+                <span class="cert-issuer-lbl">UC San Diego (Coursera) · Nov 2023</span>
+              </div>
+              <div class="cert-item-cyber">
+                <span class="cert-name-lbl">Transforming Oncology Clinical Research</span>
+                <span class="cert-issuer-lbl">Udemy · Jun 2024</span>
+              </div>
+              <div class="cert-item-cyber">
+                <span class="cert-name-lbl">Healthcare IT &amp; Management 2.0</span>
+                <span class="cert-issuer-lbl">Udemy · Jun 2024</span>
+              </div>
+              <div class="cert-item-cyber">
+                <span class="cert-name-lbl">Modernizing Clinical Trials</span>
+                <span class="cert-issuer-lbl">Udemy · Jun 2024</span>
+              </div>
+            </div>
+
+            <h3 class="worked-with-h3" style="margin-bottom: 12px;">Extra-Curricular Achievements</h3>
+            <ul class="timeline-desc-list" style="margin-bottom: 14px;">
+              <li><strong>NPPRD 2023 Poster Presenter (Feb 2023):</strong> Presented review paper on
+                <em>"Revolutionizing Pharmaceuticals: The Power of Artificial Intelligence"</em> at Bundelkhand
+                University Jhansi.
+              </li>
+              <li><strong>Volunteer (Dec 2023):</strong> Worked at Animal Research Centre BU Jhansi; co-authored SOPs
+                for Animal House Facility under CPCSEA guidelines.</li>
+              <li><strong>Boys Hostel Coordinator &amp; Community Initiatives (2020 – 2024):</strong> Managed student
+                coordination, Dura Puja management committee, co-founded university community kitchen.</li>
+            </ul>
+
+          </article>
+
+          <!-- PANEL 4: SKILLS CONSOLE -->
+          <article class="hologram-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="hardware-chip-outline"></ion-icon>
+                <span>Cognitive Matrix</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_04 // CORE_SKILLS</span>
+            </div>
+
+            <div class="skills-grid-wrapper">
+
+              <div class="skills-console-card">
+                <div class="skills-console-title">
+                  <span>REGULATORY AFFAIRS &amp; PHARMA</span>
+                  <span>APAC CORE</span>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>Regulatory Affairs (APAC)</span>
+                    <span>88%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="88%"></div>
+                  </div>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>eCTD / ASEAN Dossier Compilation</span>
+                    <span>86%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="86%"></div>
+                  </div>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>GMP / GVP Compliance</span>
+                    <span>84%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="84%"></div>
+                  </div>
+                </div>
+
+                <div class="detailed-skills-scroll-box">
+                  <strong>Regulatory:</strong> Regulatory Affairs (APAC); Product Registration &amp; Submission; eCTD /
+                  CTD / ACTD Dossiers; Modules 1–5 Compilation; ASEAN / ICH Guidelines; GMP / GVP Compliance;
+                  Pharmacovigilance (PV); ICSR &amp; Signal Detection; Bioequivalence Review; Artwork &amp; Labelling
+                  Review; Stability Data Review; HA Query Management.
+                </div>
+                <div class="detailed-skills-scroll-box" style="border-top: none; padding-top: 0; margin-top: 4px;">
+                  <strong>Pharma Sciences &amp; Labs:</strong> QSAR / ADMET / PBPK; Drug Formulation; Pharmacokinetics;
+                  Clinical Trial Support; GCP Guidelines; Lab Techniques (HPLC, UV/Vis, NMR, PCR).
+                </div>
+              </div>
+
+              <div class="skills-console-card">
+                <div class="skills-console-title">
+                  <span>BUSINESS DEVELOPMENT &amp; TECH</span>
+                  <span>COMMERCIAL PIPELINES</span>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>Business Development (B2B)</span>
+                    <span>92%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="92%"></div>
+                  </div>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>AI &amp; Sales Automation (Python / JS / Zoho)</span>
+                    <span>85%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="85%"></div>
+                  </div>
+                </div>
+
+                <div class="skills-item-cyber">
+                  <div class="skills-item-label">
+                    <span>Web Development</span>
+                    <span>80%</span>
+                  </div>
+                  <div class="skills-progress-bg-cyber">
+                    <div class="skills-progress-fill-cyber" data-width="80%"></div>
+                  </div>
+                </div>
+
+                <div class="detailed-skills-scroll-box">
+                  <strong>Business Development:</strong> B2B sales; Account Management; International Market Entry;
+                  Client Retention; Lead Generation (AI-driven); CRM Management (Zoho, Zoho Creators, Flow); n8n/Make
+                  Automation; Contract Lifecycle Management.
+                </div>
+                <div class="detailed-skills-scroll-box" style="border-top: none; padding-top: 0; margin-top: 4px;">
+                  <strong>Soft Skills:</strong> B2B Communication; Mentorship; Problem Solving; Team Collaboration;
+                  Critical Thinking.
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PANEL 5: PROJECTS -->
+          <article class="hologram-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="layers-outline"></ion-icon>
+                <span>Innovation Core</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_05 // PROJECTS</span>
+            </div>
+
+            <div class="projects-grid">
+
+              <div class="project-card-cyber">
+                <div class="project-info-cyber">
+                  <h4><a href="https://ai.pharmalite.in" target="_blank">PharmaChat AI <ion-icon
+                        name="open-outline"></ion-icon></a></h4>
+                  <div class="project-date-lbl">2023 - Present</div>
+                  <p class="project-desc-cyber">Multi-module AI assistant achieving 100% pharmacology accuracy.
+                    Integrates PharmaChat, MediProGuide, MedicoChat, accessible via web and WhatsApp.</p>
+                </div>
+                <div class="project-tech-badges">
+                  <span class="tech-badge-cyber">Python</span>
+                  <span class="tech-badge-cyber">PHP</span>
+                  <span class="tech-badge-cyber">NodeJS</span>
+                  <span class="tech-badge-cyber">AI</span>
+                </div>
+              </div>
+
+              <div class="project-card-cyber">
+                <div class="project-info-cyber">
+                  <h4><a href="https://ai.pharmalite.in" target="_blank">PharmaPredict AI <ion-icon
+                        name="open-outline"></ion-icon></a></h4>
+                  <div class="project-date-lbl">2024 - Present</div>
+                  <p class="project-desc-cyber">ML web platform for predicting molecular ADMET properties and SAR
+                    molecular screening, allowing in-silico screening of candidates.</p>
+                </div>
+                <div class="project-tech-badges">
+                  <span class="tech-badge-cyber">Python</span>
+                  <span class="tech-badge-cyber">Machine Learning</span>
+                  <span class="tech-badge-cyber">MySQL</span>
+                </div>
+              </div>
+
+              <div class="project-card-cyber">
+                <div class="project-info-cyber">
+                  <h4><a href="https://jobs.pharmalite.in" target="_blank">PharmaJobs <ion-icon
+                        name="open-outline"></ion-icon></a></h4>
+                  <div class="project-date-lbl">2024 - Present</div>
+                  <p class="project-desc-cyber">Niche pharma job portal processing 5k+ applications. Integrated AI-based
+                    scam detection ensuring 100% listing safety.</p>
+                </div>
+                <div class="project-tech-badges">
+                  <span class="tech-badge-cyber">PHP</span>
+                  <span class="tech-badge-cyber">MySQL</span>
+                  <span class="tech-badge-cyber">AI Filter</span>
+                </div>
+              </div>
+
+              <div class="project-card-cyber">
+                <div class="project-info-cyber">
+                  <h4><a
+                      href="https://blog.pharmalite.in/2024/02/use%20of%20artificial%20intelligence%20in%20pharmaceuticals%20Sohan%20lal.html"
+                      target="_blank">AI in Pharma Research <ion-icon name="open-outline"></ion-icon></a></h4>
+                  <div class="project-date-lbl">Nov 2023 - May 2024</div>
+                  <p class="project-desc-cyber">62-page review paper on AI integration in pharmaceutical R&amp;D (QSAR,
+                    ADMET, PBPK). Presented as poster at NPPRD 2023.</p>
+                </div>
+                <div class="project-tech-badges">
+                  <span class="tech-badge-cyber">QSAR</span>
+                  <span class="tech-badge-cyber">PBPK</span>
+                  <span class="tech-badge-cyber">AI Review</span>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PANEL 6: BLOG & COMMUNICATIONS -->
+          <article class="hologram-panel">
+            <div class="panel-header">
+              <h2 class="panel-title">
+                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+                <span>Holographic Broadcast &amp; Uplink</span>
+              </h2>
+              <span class="panel-meta-tag">SECTOR_06 // BLOG_COMMS</span>
+            </div>
+
+            <div class="blog-contact-split">
+
+              <!-- Blog Posts List -->
+              <div>
+                <h3 class="worked-with-h3">Recent Broadcasts</h3>
+                <div class="blog-posts-cyber-list">
+
+                  <a href="https://blog.pharmalite.in/2024/05/the-severe-heatwave-in-india-causes.html?m=1"
+                    target="_blank" class="blog-post-card-cyber">
+                    <div class="blog-img-box">
+                      <img src="./assets/images/blog-1.jpg" alt="Heatwave">
+                    </div>
+                    <div class="blog-content-info">
+                      <div class="blog-meta-tags">
+                        <span class="blog-category-tag">HEALTH UPDATE</span>
+                        <span>MAY 29, 2024</span>
+                      </div>
+                      <span class="blog-title-lbl">The Severe Heatwave in India: Causes, Effects, and Preventive
+                        Measures</span>
+                    </div>
+                  </a>
+
+                  <a href="https://www.pharmalite.in/2024/01/antacids-causing-kidney-damage.html?m=1" target="_blank"
+                    class="blog-post-card-cyber">
+                    <div class="blog-img-box">
+                      <img src="./assets/images/blog-2.jpg" alt="Antacids">
+                    </div>
+                    <div class="blog-content-info">
+                      <div class="blog-meta-tags">
+                        <span class="blog-category-tag">KIDNEY HEALTH</span>
+                        <span>JAN 19, 2024</span>
+                      </div>
+                      <span class="blog-title-lbl">Silent Threats in Your Medicine Cabinet: Antacids &amp; Kidney
+                        Damage</span>
+                    </div>
+                  </a>
+
+                  <a href="https://blog.pharmalite.in/2023/02/career-options-and-higher-education-after-b-pharm.html?m=1"
+                    target="_blank" class="blog-post-card-cyber">
+                    <div class="blog-img-box">
+                      <img src="./assets/images/blog-3.jpg" alt="Career B.Pharm">
+                    </div>
+                    <div class="blog-content-info">
+                      <div class="blog-meta-tags">
+                        <span class="blog-category-tag">CAREER</span>
+                        <span>FEB 13, 2023</span>
+                      </div>
+                      <span class="blog-title-lbl">Career Options and Higher Education after B.Pharm</span>
+                    </div>
+                  </a>
+
+                  <a href="https://blog.pharmalite.in/2023/02/second-heart-attack-cause-prevention.html?m=1"
+                    target="_blank" class="blog-post-card-cyber">
+                    <div class="blog-img-box">
+                      <img src="./assets/images/blog-4.jpg" alt="Heart Care">
+                    </div>
+                    <div class="blog-content-info">
+                      <div class="blog-meta-tags">
+                        <span class="blog-category-tag">HEART CARE</span>
+                        <span>FEB 05, 2023</span>
+                      </div>
+                      <span class="blog-title-lbl">Second Heart Attack: Causes, Prevention and Medication</span>
+                    </div>
+                  </a>
+
+                </div>
+              </div>
+
+              <!-- Contact Form -->
+              <div>
+                <h3 class="worked-with-h3">Transmit Secure Comms</h3>
+                <form id="contactForm" class="contact-form-cyber" onsubmit="return submitCyberForm();">
+
+                  <div class="cyber-input-wrapper">
+                    <input type="text" id="fullname" class="cyber-input" placeholder="Full Name" required>
+                    <ion-icon name="person-outline"></ion-icon>
+                  </div>
+
+                  <div class="cyber-input-wrapper">
+                    <input type="email" id="email" class="cyber-input" placeholder="Email Address" required>
+                    <ion-icon name="mail-outline"></ion-icon>
+                  </div>
+
+                  <div class="cyber-input-wrapper">
+                    <select id="subject" class="cyber-input">
+                      <option value="">Select Topic (Optional)</option>
+                      <option>Business Development / Partnership</option>
+                      <option>Regulatory Affairs Consulting</option>
+                      <option>Pharmalite / PharmaJobs</option>
+                      <option>AI / Tech Collaboration</option>
+                      <option>Speaking / Conference</option>
+                      <option>Other</option>
+                    </select>
+                    <ion-icon name="options-outline"></ion-icon>
+                  </div>
+
+                  <textarea id="message" class="cyber-textarea" placeholder="Enter secure transmission message..."
+                    required></textarea>
+
+                  <button type="submit" id="cyber-btn" class="cyber-submit-btn">
+                    <ion-icon name="paper-plane-outline"></ion-icon>
+                    <span>Transmit Message</span>
+                  </button>
+
+                  <div id="form-status-msg"></div>
+                </form>
+              </div>
+
+            </div>
+
+            <!-- Hobbies List (Recreational logs) -->
+            <h4 class="recreational-title">Recreational Logs</h4>
+            <div class="hobbies-cyber-list">
+
+              <div class="hobby-card-cyber">
+                <div class="hobby-icon">
+                  <ion-icon name="headset-outline"></ion-icon>
+                </div>
+                <div class="hobby-info">
+                  <h5>Music &amp; Acoustics</h5>
+                  <p>Deep appreciation for Hindi, Punjabi, and Bhojpuri songs. From classics of Lata Mangeshkar to Honey
+                    Singh.</p>
+                </div>
+              </div>
+
+              <div class="hobby-card-cyber">
+                <div class="hobby-icon">
+                  <ion-icon name="code-working-outline"></ion-icon>
+                </div>
+                <div class="hobby-info">
+                  <h5>Web Development &amp; AI</h5>
+                  <p>Built Pharmalite.in, PharmaJobs, PharmaChat AI (100% pharmacology accuracy), and PharmaPredict AI.
+                  </p>
+                </div>
+              </div>
+
+              <div class="hobby-card-cyber">
+                <div class="hobby-icon">
+                  <ion-icon name="pencil-outline"></ion-icon>
+                </div>
+                <div class="hobby-info">
+                  <h5>Creative Writing</h5>
+                  <p>Passionate about creative health and pharmaceutical content writing published regularly at
+                    blog.pharmalite.in.</p>
+                </div>
+              </div>
+
+              <div class="hobby-card-cyber">
+                <div class="hobby-icon">
+                  <ion-icon name="people-outline"></ion-icon>
+                </div>
+                <div class="hobby-info">
+                  <h5>Social Media &amp; Community</h5>
+                  <p>Manage Pharmalite YouTube channel (12k+ subs), host live expert academic sessions and online
+                    forums.</p>
+                </div>
+              </div>
+
+            </div>
+
+          </article>
+
         </div>
-        <div class="exp-company"><a href="https://pharmalite.in" target="_blank" style="color:var(--accent2);text-decoration:none">Pharmalite · pharmalite.in ↗</a></div>
-        <div class="exp-location">📍 Kanpur, India · Self-employed</div>
-        <ul class="exp-bullets">
-          <li>Founded Pharmalite during <strong>first year of B.Pharm</strong> after a 13,000-student survey; now serves <strong>5 million+ pharmacy students</strong> across India.</li>
-          <li>Launched <strong>PharmaJobs</strong> (jobs.pharmalite.in) — niche pharma job portal processing 5,000+ applications with AI-powered fraud detection.</li>
-          <li>Built <strong>PharmaChat AI</strong> — multi-module assistant (PharmaChat, MediProGuide, MedicoChat) achieving <strong>100% pharmacology accuracy</strong>.</li>
-          <li>Developed <strong>PharmaPredict AI</strong> — ML platform for ADMET and SAR-based molecular activity prediction.</li>
-          <li>Grew <strong>YouTube community to 12,000+ subscribers</strong>; hosted 10+ live expert sessions during college.</li>
-        </ul>
       </div>
-    </div>
+
+      <!-- Navigation Arrows -->
+      <button class="carousel-arrow arrow-left" id="arrow-prev">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </button>
+      <button class="carousel-arrow arrow-right" id="arrow-next">
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </button>
+
+    </main>
 
   </div>
-</section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">Projects</div>
-  <h2 class="section-title">What I've<br>Built</h2>
-  <div class="projects-grid">
-
-    <div class="proj-card featured reveal">
-      <div class="proj-top">
-        <div class="proj-icon">🤖</div>
-        <div class="proj-links">
-          <a href="https://ai.pharmalite.in" target="_blank" class="proj-link" title="Visit">↗</a>
-        </div>
-      </div>
-      <div class="proj-name">PharmaChat AI</div>
-      <div class="proj-desc">India's dedicated pharmacy and healthcare AI assistant ecosystem — serving students, medical professionals, and the general public. Multi-module architecture with PharmaChat, MediProGuide, MedicoChat, and AI Assistant. Achieves 100% pharmacology and 95% clinical pharmacy accuracy. Accessible via web and WhatsApp. Built in partnership with Medicofact under the Pharmalite ecosystem.</div>
-      <div class="proj-stats">
-        <div class="proj-stat">100% <span>Pharmacology Accuracy</span></div>
-        <div class="proj-stat">95% <span>Clinical Pharmacy</span></div>
-        <div class="proj-stat">4 <span>Specialized Modules</span></div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span><span class="proj-tag">PHP</span><span class="proj-tag">Node.js</span><span class="proj-tag">NLP</span><span class="proj-tag">Healthcare AI</span><span class="proj-tag">WhatsApp</span>
-      </div>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-top">
-        <div class="proj-icon">🧬</div>
-        <div class="proj-links">
-          <a href="https://ai.pharmalite.in" target="_blank" class="proj-link">↗</a>
-        </div>
-      </div>
-      <div class="proj-name">PharmaPredict AI</div>
-      <div class="proj-desc">ML web platform for predicting molecular activity and ADMET properties using Structure-Activity Relationships (SAR). Applied outcome of B.Pharm major project on polypharmacology and AI-driven drug discovery. Enables in-silico compound screening to reduce late-stage R&D failures.</div>
-      <div class="proj-tags">
-        <span class="proj-tag">Python</span><span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">Machine Learning</span><span class="proj-tag">ADMET</span><span class="proj-tag">SAR</span>
-      </div>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-top">
-        <div class="proj-icon">💼</div>
-        <div class="proj-links">
-          <a href="https://jobs.pharmalite.in" target="_blank" class="proj-link">↗</a>
-        </div>
-      </div>
-      <div class="proj-name">PharmaJobs</div>
-      <div class="proj-desc">Niche pharmaceutical and healthcare job portal — processing 5,000+ applications with 30+ monthly active listings. Integrated AI-based scam detection system for 100% verified listings. Built in final year of B.Pharm.</div>
-      <div class="proj-stats">
-        <div class="proj-stat">5,000+ <span>Applications</span></div>
-        <div class="proj-stat">30+ <span>Listings/month</span></div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">AI Fraud Detection</span><span class="proj-tag">Job Portal</span>
-      </div>
-    </div>
-
-    <div class="proj-card reveal">
-      <div class="proj-top">
-        <div class="proj-icon">📚</div>
-        <div class="proj-links">
-          <a href="https://pharmalite.in" target="_blank" class="proj-link">↗</a>
-        </div>
-      </div>
-      <div class="proj-name">Pharmalite</div>
-      <div class="proj-desc">E-learning ecosystem for pharmacy students founded in first year of B.Pharm after a 13,000-student survey. Now serves 5 million+ students with study materials, resources, and academic content. YouTube community of 12,000+ subscribers.</div>
-      <div class="proj-stats">
-        <div class="proj-stat">5M+ <span>Students</span></div>
-        <div class="proj-stat">12K+ <span>YT Subscribers</span></div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">PHP</span><span class="proj-tag">MySQL</span><span class="proj-tag">EdTech</span><span class="proj-tag">YouTube</span>
-      </div>
-    </div>
-
+  <!-- FIX 2: Circular HUD D-pad Navigation Controller -->
+  <div class="hud-dpad">
+    <button class="dpad-btn dpad-up" onclick="scrollActivePanel('up')" title="Scroll Panel Up">
+      <ion-icon name="chevron-up-outline"></ion-icon>
+    </button>
+    <button class="dpad-btn dpad-left" onclick="rotateToPanel(currentPanelIndex - 1)" title="Rotate Left">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </button>
+    <div class="dpad-center">HUD</div>
+    <button class="dpad-btn dpad-right" onclick="rotateToPanel(currentPanelIndex + 1)" title="Rotate Right">
+      <ion-icon name="chevron-forward-outline"></ion-icon>
+    </button>
+    <button class="dpad-btn dpad-down" onclick="scrollActivePanel('down')" title="Scroll Panel Down">
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </button>
   </div>
-</section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-label">Skills</div>
-  <h2 class="section-title">Technical<br>Expertise</h2>
-  <div class="skills-container">
-    <div class="skill-group reveal">
-      <div class="skill-group-title"><div class="skill-group-icon">⚗️</div> Regulatory Affairs</div>
-      <div class="skill-bars">
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">eCTD / ASEAN Dossiers</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">GMP / GVP Compliance</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Pharmacovigilance / ICSR</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">ICH / ASEAN Guidelines</span><span class="skill-bar-pct">86%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="86"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Bioequivalence Review</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
-      </div>
-    </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title"><div class="skill-group-icon">📈</div> Business Development</div>
-      <div class="skill-bars">
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">International Market Entry</span><span class="skill-bar-pct">90%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">CRM Management (Zoho)</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="88"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Sales Automation (AI)</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Contract Lifecycle Mgmt</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Lead Generation</span><span class="skill-bar-pct">92%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="92"></div></div></div>
-      </div>
-    </div>
-    <div class="skill-group reveal">
-      <div class="skill-group-title"><div class="skill-group-icon">💻</div> Technology</div>
-      <div class="skill-bars">
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="82"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">JavaScript / Node.js</span><span class="skill-bar-pct">80%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">PHP / MySQL</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">n8n / AI Automation</span><span class="skill-bar-pct">78%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div></div>
-        <div class="skill-bar-item"><div class="skill-bar-top"><span class="skill-bar-name">Machine Learning / AI</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- SCRIPT FOR SYSTEM OPERATION -->
+  <script>
+    /* ── DYNAMIC BOOT LOADER LOGS ── */
+    const logs = [
+      "INITIALIZING NEURAL CONNECTIONS...",
+      "ESTABLISHING PHARMA-AI DATABUS CORE...",
+      "CONNECTING TO GLOBAL NETWORKS (APAC/ICH)...",
+      "DETERMINING COORDINATES: KANPUR, INDIA [GMT+5:30]...",
+      "SCANNING DOSSIERS MODULES 1 TO 5 ACTIVE...",
+      "COMPILING GENEDRIFT DATABASE ENTRY V2.0...",
+      "AI PIPELINE ACTIVE: PYTHON / WHATSAPP / WHATSAPP-API CORE...",
+      "HOLOGRAPHIC ARRAY POWER GRID NOMINAL...",
+      "ESTABLISHING HYPERLINK PROTOCOLS...",
+      "TRANSMISSION READY. DEPLOYING RESUME DISPLAY SYSTEM."
+    ];
 
-<!-- EDUCATION -->
-<section id="education">
-  <div class="section-label">Education</div>
-  <h2 class="section-title">Academic<br>Background</h2>
-  <div class="edu-grid reveal">
-    <div class="edu-card">
-      <div class="edu-year">2020 – 2024</div>
-      <div class="edu-degree">Bachelor of Pharmacy (B.Pharm)</div>
-      <div class="edu-school">Bundelkhand University, Jhansi · Institute of Pharmacy</div>
-      <span class="edu-grade">Grade A · 75%</span>
-      <p style="color:var(--grey);font-size:13.5px;margin-top:14px;line-height:1.6">Major project: <em>Integrating AI in Pharma: Revolutionizing Drug Discovery and Formulation for Future Healthcare</em>. Poster presenter at NPPRD 2023 International Conference. Founded Pharmalite and PharmaJobs during college.</p>
-    </div>
-    <div class="edu-card">
-      <div class="edu-year">2016 – 2017</div>
-      <div class="edu-degree">Intermediate (XII)</div>
-      <div class="edu-school">Rohan Singh Inter College, Kanpur</div>
-      <span class="edu-grade">Grade A</span>
-    </div>
-  </div>
-  <div class="cert-list reveal">
-    <div class="cert-item"><div class="cert-name">Drug Discovery</div><div class="cert-issuer">UC San Diego (Coursera) · Nov 2023</div></div>
-    <div class="cert-item"><div class="cert-name">Transforming Oncology Clinical Research</div><div class="cert-issuer">Udemy · Jun 2024</div></div>
-    <div class="cert-item"><div class="cert-name">Healthcare IT & Management 2.0</div><div class="cert-issuer">Udemy · Jun 2024</div></div>
-    <div class="cert-item"><div class="cert-name">Modernizing Clinical Trials</div><div class="cert-issuer">Udemy · Jun 2024</div></div>
-    <div class="cert-item"><div class="cert-name">NPPRD 2023 Poster Presenter</div><div class="cert-issuer">Bundelkhand University International Conference</div></div>
-    <div class="cert-item"><div class="cert-name">NAAC Inspection Volunteer</div><div class="cert-issuer">Bundelkhand University · Animal House SOPs</div></div>
-  </div>
-</section>
+    const logsContainer = document.getElementById("boot-logs");
+    let currentLogIndex = 0;
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="section-label">Contact</div>
-  <h2 class="section-title">Let's Work<br>Together</h2>
-  <div class="contact-wrapper">
-    <div class="contact-info reveal">
-      <p class="contact-intro">Open to regulatory consulting, business development partnerships, pharma-tech collaborations, and speaking opportunities across APAC, Africa, and GCC markets.</p>
-      <a class="contact-item" href="tel:+918127246983">
-        <div class="contact-item-icon">📞</div>
-        <div><div class="contact-item-text">Phone</div><div class="contact-item-val">+91 81272 46983</div></div>
-      </a>
-      <a class="contact-item" href="mailto:sohan@genedrift.com">
-        <div class="contact-item-icon">📧</div>
-        <div><div class="contact-item-text">Work Email</div><div class="contact-item-val">sohan@genedrift.com</div></div>
-      </a>
-      <a class="contact-item" href="mailto:sohanlalkush@hotmail.com">
-        <div class="contact-item-icon">✉️</div>
-        <div><div class="contact-item-text">Personal Email</div><div class="contact-item-val">sohanlalkush@hotmail.com</div></div>
-      </a>
-      <a class="contact-item" href="https://sohanlal.pharmalite.in" target="_blank">
-        <div class="contact-item-icon">🌐</div>
-        <div><div class="contact-item-text">Website</div><div class="contact-item-val">sohanlal.pharmalite.in</div></div>
-      </a>
-      <a class="contact-item" href="https://www.linkedin.com/in/sohanlalkush" target="_blank">
-        <div class="contact-item-icon">💼</div>
-        <div><div class="contact-item-text">LinkedIn</div><div class="contact-item-val">linkedin.com/in/sohanlalkush</div></div>
-      </a>
-      <div class="social-row">
-        <a class="social-btn" href="https://www.instagram.com/sohanlalkush" target="_blank" title="Instagram">📸</a>
-        <a class="social-btn" href="https://www.facebook.com/sohanlal.kushwaha.1" target="_blank" title="Facebook">📘</a>
-        <a class="social-btn" href="https://www.youtube.com/@pharmalite" target="_blank" title="YouTube">▶️</a>
-        <a class="social-btn" href="https://blog.pharmalite.in" target="_blank" title="Blog">✍️</a>
-      </div>
-    </div>
+    function addLogLine() {
+      if (currentLogIndex < logs.length) {
+        const line = document.createElement("div");
+        line.className = "boot-line";
+        line.style.animationDelay = `${currentLogIndex * 0.15}s`;
+        line.innerHTML = `<span style="color:#ffca47">[OK]</span> ${logs[currentLogIndex]}`;
+        logsContainer.appendChild(line);
+        logsContainer.scrollTop = logsContainer.scrollHeight;
+        currentLogIndex++;
+        setTimeout(addLogLine, 120 + Math.random() * 80);
+      }
+    }
 
-    <div class="contact-form reveal">
-      <div class="form-title">Send a Message</div>
-      <div id="formSuccess" class="form-success">
-        <div class="form-success-icon">✅</div>
-        <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:8px">Message Sent!</div>
-        <div style="color:var(--grey)">Thank you for reaching out. I'll get back to you within 24 hours.</div>
-      </div>
-      <form id="contactForm" onsubmit="submitForm(event)">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Your Name *</label>
-            <input type="text" id="fname" placeholder="Full name" required>
-          </div>
-          <div class="form-group">
-            <label>Email Address *</label>
-            <input type="email" id="femail" placeholder="your@email.com" required>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Phone / WhatsApp</label>
-            <input type="text" id="fphone" placeholder="+91 ...">
-          </div>
-          <div class="form-group">
-            <label>Subject</label>
-            <select id="fsubject">
-              <option value="">Select topic</option>
-              <option>Business Development / Partnership</option>
-              <option>Regulatory Affairs Consulting</option>
-              <option>Pharmalite / PharmaJobs</option>
-              <option>AI / Tech Collaboration</option>
-              <option>Speaking / Conference</option>
-              <option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label>Message *</label>
-          <textarea id="fmessage" placeholder="Tell me about your project or opportunity..." required></textarea>
-        </div>
-        <button type="submit" class="form-submit" id="submitBtn">
-          <span id="submitText">Send Message 🚀</span>
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
+    // Trigger boot print
+    setTimeout(addLogLine, 100);
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-copy">
-    © 2025 <a href="https://sohanlal.pharmalite.in">Sohan Lal Kushwaha</a> · Built with ♥ · Hosted on Vercel
-  </div>
-  <div class="footer-links">
-    <a href="https://pharmalite.in" target="_blank">Pharmalite</a>
-    <a href="https://jobs.pharmalite.in" target="_blank">PharmaJobs</a>
-    <a href="https://ai.pharmalite.in" target="_blank">PharmaChat AI</a>
-    <a href="https://genedrift.com" target="_blank">Genedrift</a>
-  </div>
-</footer>
+    // Fade boot overlay
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const bootScreen = document.getElementById("boot-screen");
+        const appRoot = document.getElementById("app-root");
 
-<script>
-// ── TELEGRAM BOT CONFIG ── Replace with your actual bot token and chat ID
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-const TELEGRAM_CHAT_ID   = 'YOUR_CHAT_ID_HERE';
+        bootScreen.style.opacity = "0";
+        bootScreen.style.visibility = "hidden";
+        appRoot.classList.add("loaded");
 
-// ── CURSOR ──
-const cursor = document.getElementById('cursor');
-const ring   = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px'; });
-function animRing(){ rx+=(mx-rx)*.12; ry+=(my-ry)*.12; ring.style.left=rx-20+'px'; ring.style.top=ry-20+'px'; requestAnimationFrame(animRing); }
-animRing();
-document.querySelectorAll('a,button,.proj-card,.exp-card,.highlight-card,.stat-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ cursor.style.transform='scale(2)'; ring.style.transform='scale(1.5)'; ring.style.opacity='.3'; });
-  el.addEventListener('mouseleave',()=>{ cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; ring.style.opacity='.6'; });
-});
+        // Trigger skills animation
+        animateSkillsProgress();
+      }, 2300);
+    });
 
-// ── NAV SCROLL ──
-window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60); });
+    /* ── TYPING TITLE IN SIDEBAR ── */
+    const titles = [
+      "BD Executive",
+      "Pharma-AI Builder",
+      "Regulatory affairs professional",
+      "Founder, Pharmalite"
+    ];
+    let titleIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const titleEl = document.getElementById("cyber-title");
 
-// ── MOBILE NAV ──
-function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('open'); }
-function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+    function typeTitleText() {
+      const currentText = titles[titleIndex];
+      if (!isDeleting) {
+        titleEl.textContent = currentText.slice(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === currentText.length) {
+          isDeleting = true;
+          setTimeout(typeTitleText, 2500);
+          return;
+        }
+      } else {
+        titleEl.textContent = currentText.slice(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          isDeleting = false;
+          titleIndex = (titleIndex + 1) % titles.length;
+        }
+      }
+      setTimeout(typeTitleText, isDeleting ? 30 : 60);
+    }
+    setTimeout(typeTitleText, 3000);
 
-// ── COUNTER ANIMATION ──
-function animateCounters(){
-  document.querySelectorAll('[data-count]').forEach(el=>{
-    const target=+el.dataset.count; let current=0;
-    const step=Math.ceil(target/60);
-    const timer=setInterval(()=>{ current=Math.min(current+step,target); el.textContent=current+'+'; if(current>=target)clearInterval(timer); },25);
-  });
-}
+    /* ── COUNTER ANIMATIONS FOR STATS ── */
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.count);
+      let current = 0;
+      const step = Math.ceil(target / 40);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = current + "+";
+        if (current >= target) clearInterval(timer);
+      }, 30);
+    }
 
-// ── SCROLL REVEAL ──
-const revealObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('[data-count]').forEach(animateCounter);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.2 });
 
-// ── SKILL BAR ANIMATION ──
-const skillObserver = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.querySelectorAll('.skill-bar-fill').forEach(bar=>{
-        bar.style.width = bar.dataset.width + '%';
+    observer.observe(document.querySelector(".sidebar-stats"));
+
+
+    /* ── 3D MULTI-DISPLAY CAROUSEL LOGIC ── */
+    const ring = document.getElementById("panel-cube-ring");
+    const panels = document.querySelectorAll(".hologram-panel");
+    const tabs = document.querySelectorAll(".nav-tab-btn");
+    const prevBtn = document.getElementById("arrow-prev");
+    const nextBtn = document.getElementById("arrow-next");
+    let currentPanelIndex = 0;
+    const totalPanels = 6; // Expanded to 6 panels
+
+    function rotateToPanel(index) {
+      currentPanelIndex = (index + totalPanels) % totalPanels;
+
+      // Compute 3D rotation angle
+      // 6 panels = 60 deg spacing
+      const angle = -60 * currentPanelIndex;
+
+      // Mobile screen override: flat flex container shifting
+      const isMobile = window.innerWidth <= 992;
+
+      if (!isMobile) {
+        // Rotates container around Y axis while translating back by translation Z to keep front card flat
+        ring.style.transform = `translateZ(calc(-1 * var(--translate-z))) rotateY(${angle}deg)`;
+      }
+
+      // Update focused states and tab indicators
+      panels.forEach((p, idx) => {
+        if (idx === currentPanelIndex) {
+          p.classList.add("focused");
+          if (isMobile) {
+            p.style.display = "block";
+            setTimeout(() => p.style.opacity = "1", 50);
+          }
+        } else {
+          p.classList.remove("focused");
+          if (isMobile) {
+            p.style.opacity = "0";
+            p.style.display = "none";
+          }
+        }
+      });
+
+      // Update navbar state
+      tabs.forEach((tab, idx) => {
+        tab.classList.toggle("active", idx === currentPanelIndex);
+      });
+
+      // Re-trigger progress bar animations if skills tab (index 3) is loaded
+      if (currentPanelIndex === 3) {
+        animateSkillsProgress();
+      }
+    }
+
+    // Attach click events to nav buttons
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        const index = parseInt(tab.dataset.index);
+        rotateToPanel(index);
+      });
+    });
+
+    // Arrow controls
+    prevBtn.addEventListener("click", () => rotateToPanel(currentPanelIndex - 1));
+    nextBtn.addEventListener("click", () => rotateToPanel(currentPanelIndex + 1));
+
+    // Keyboard controls
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") rotateToPanel(currentPanelIndex - 1);
+      if (e.key === "ArrowRight") rotateToPanel(currentPanelIndex + 1);
+    });
+
+    // Progress Bar load animation
+    function animateSkillsProgress() {
+      const progressFills = document.querySelectorAll(".skills-progress-fill-cyber");
+      progressFills.forEach(fill => {
+        const widthVal = fill.dataset.width;
+        fill.style.width = "0%";
+        setTimeout(() => {
+          fill.style.width = widthVal;
+        }, 150);
       });
     }
-  });
-},{threshold:0.2});
-document.querySelectorAll('.skill-group').forEach(g=>skillObserver.observe(g));
 
-// ── COUNTER TRIGGER ──
-const heroObserver = new IntersectionObserver((entries)=>{
-  if(entries[0].isIntersecting) animateCounters();
-},{threshold:0.3});
-heroObserver.observe(document.getElementById('hero'));
+    // FIX 2: Up/Down D-pad scroll helper for currently focused panel
+    function scrollActivePanel(direction) {
+      const activePanel = document.querySelector(".hologram-panel.focused");
+      if (activePanel) {
+        const scrollOffset = 150;
+        if (direction === "up") {
+          activePanel.scrollBy({ top: -scrollOffset, behavior: "smooth" });
+        } else if (direction === "down") {
+          activePanel.scrollBy({ top: scrollOffset, behavior: "smooth" });
+        }
+      }
+    }
 
-// ── CONTACT FORM → TELEGRAM ──
-async function submitForm(e){
-  e.preventDefault();
-  const btn  = document.getElementById('submitBtn');
-  const txt  = document.getElementById('submitText');
-  txt.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const name    = document.getElementById('fname').value;
-  const email   = document.getElementById('femail').value;
-  const phone   = document.getElementById('fphone').value;
-  const subject = document.getElementById('fsubject').value;
-  const message = document.getElementById('fmessage').value;
-
-  const text = `🔔 *New Portfolio Message*\n\n👤 *Name:* ${name}\n📧 *Email:* ${email}\n📞 *Phone:* ${phone||'—'}\n📌 *Subject:* ${subject||'—'}\n\n💬 *Message:*\n${message}\n\n🕐 ${new Date().toLocaleString('en-IN',{timeZone:'Asia/Kolkata'})}`;
-
-  try {
-    const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text, parse_mode:'Markdown' })
+    // Handle mobile load
+    window.addEventListener("resize", () => {
+      rotateToPanel(currentPanelIndex);
     });
-    const data = await res.json();
-    if(data.ok){
-      document.getElementById('contactForm').style.display='none';
-      document.getElementById('formSuccess').style.display='block';
-    } else { throw new Error('Telegram error'); }
-  } catch(err){
-    // fallback: mailto
-    window.location.href=`mailto:sohan@genedrift.com?subject=${encodeURIComponent(subject||'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\n${message}`)}`;
-    txt.textContent = 'Send Message 🚀';
-    btn.disabled = false;
-  }
-}
-</script>
+
+    /* ── TELEGRAM SECURE MESSAGE SUBMISSION ── */
+    function submitCyberForm() {
+      const website = window.location.host + "/3d_resume.html";
+      const name = document.getElementById('fullname').value;
+      const email = document.getElementById('email').value;
+      const subject = document.getElementById('subject').value;
+      const message = document.getElementById('message').value;
+      const submitBtn = document.getElementById('cyber-btn');
+      const statusMsg = document.getElementById('form-status-msg');
+
+      if (!name || !email || !message) {
+        statusMsg.innerHTML = '<span style="color:#ffca47">⚠️ Name, email, and message are required.</span>';
+        return false;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>TRANSMITTING...</span>';
+
+      const text = `🔔 Cyber Request via 3D Resume: ${website}\n\n👤 Name: ${name}\n📧 Email: ${email}\n📌 Subject: ${subject || '—'}\n\n💬 Message:\n${message}`;
+      const url = `https://api.telegram.org/bot6109747569:AAFl8r998Bg9G1Q-I6YAdhznKo5Q8mjl7Es/sendMessage?chat_id=-1001863890258&text=${encodeURIComponent(text)}`;
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.onload = function () {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<ion-icon name="paper-plane-outline"></ion-icon><span>Transmit Message</span>';
+
+        if (xhr.status === 200) {
+          document.getElementById('contactForm').reset();
+          statusMsg.innerHTML = '<span style="color:#00f3ff; font-weight:500">✓ TRANSMISSION SUCCESSFUL! Uplink connected.</span>';
+        } else {
+          statusMsg.innerHTML = '<span style="color:#f43f5e">❌ TRANSMISSION FAULT. Email directly: sohanlalkush@hotmail.com</span>';
+        }
+      };
+      xhr.onerror = function () {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<ion-icon name="paper-plane-outline"></ion-icon><span>Transmit Message</span>';
+        statusMsg.innerHTML = '<span style="color:#f43f5e">❌ TRANSMISSION FAULT. Check network.</span>';
+      };
+      xhr.send();
+      return false;
+    }
+
+
+    /* ── THREE.JS WebGL BACKGROUND SCENE ── */
+    const canvas = document.getElementById("three-bg");
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.z = 25;
+
+    // Resize handler
+    function resizeCanvas() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    // 3D DNA Helix Structure Generator
+    const dnaGroup = new THREE.Group();
+    scene.add(dnaGroup);
+
+    const helixPoints = 70;
+    const radius = 3.5;
+    const spacing = 0.25;
+    const strand1Geo = new THREE.BufferGeometry();
+    const strand2Geo = new THREE.BufferGeometry();
+    const strand1Positions = new Float32Array(helixPoints * 3);
+    const strand2Positions = new Float32Array(helixPoints * 3);
+
+    // Create helical strands points
+    for (let i = 0; i < helixPoints; i++) {
+      const t = (i / helixPoints) * (Math.PI * 2 * 3.5); // 3.5 turns
+      const y = (i / helixPoints) * 20 - 10; // Spreads along vertical axis
+
+      const x1 = Math.cos(t) * radius;
+      const z1 = Math.sin(t) * radius;
+
+      const x2 = Math.cos(t + Math.PI) * radius;
+      const z2 = Math.sin(t + Math.PI) * radius;
+
+      // Strand 1
+      strand1Positions[i * 3] = x1;
+      strand1Positions[i * 3 + 1] = y;
+      strand1Positions[i * 3 + 2] = z1;
+
+      // Strand 2
+      strand2Positions[i * 3] = x2;
+      strand2Positions[i * 3 + 1] = y;
+      strand2Positions[i * 3 + 2] = z2;
+
+      // Add connectors (base pairs) every few segments
+      if (i % 2 === 0) {
+        const lineMat = new THREE.LineBasicMaterial({
+          color: (i % 4 === 0) ? 0x00f3ff : 0xffca47,
+          transparent: true,
+          opacity: 0.35
+        });
+        const lineGeo = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(x1, y, z1),
+          new THREE.Vector3(x2, y, z2)
+        ]);
+        const line = new THREE.Line(lineGeo, lineMat);
+        dnaGroup.add(line);
+      }
+    }
+
+    strand1Geo.setAttribute('position', new THREE.BufferAttribute(strand1Positions, 3));
+    strand2Geo.setAttribute('position', new THREE.BufferAttribute(strand2Positions, 3));
+
+    // Particle materials for DNA
+    const pointMaterial1 = new THREE.PointsMaterial({
+      color: 0x00f3ff,
+      size: 0.3,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const pointMaterial2 = new THREE.PointsMaterial({
+      color: 0xffca47,
+      size: 0.3,
+      transparent: true,
+      opacity: 0.8
+    });
+
+    const strand1Points = new THREE.Points(strand1Geo, pointMaterial1);
+    const strand2Points = new THREE.Points(strand2Geo, pointMaterial2);
+    dnaGroup.add(strand1Points);
+    dnaGroup.add(strand2Points);
+
+    // Drift particles background
+    const particleCount = 140;
+    const particlesGeo = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 50;
+      positions[i + 1] = (Math.random() - 0.5) * 50;
+      positions[i + 2] = (Math.random() - 0.5) * 30;
+    }
+
+    particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    const particlesMat = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.08,
+      transparent: true,
+      opacity: 0.25
+    });
+
+    const starfield = new THREE.Points(particlesGeo, particlesMat);
+    scene.add(starfield);
+
+    // Positional illumination
+    const dirLight1 = new THREE.DirectionalLight(0x00f3ff, 1);
+    dirLight1.position.set(10, 10, 10);
+    scene.add(dirLight1);
+
+    const dirLight2 = new THREE.DirectionalLight(0xffca47, 0.7);
+    dirLight2.position.set(-10, -10, -10);
+    scene.add(dirLight2);
+
+    // Mouse parallax variables
+    let mouseX = 0;
+    let mouseY = 0;
+    document.addEventListener("mousemove", (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) / 100;
+      mouseY = (e.clientY - window.innerHeight / 2) / 100;
+    });
+
+    // Render Animation loop
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      const elapsedTime = clock.getElapsedTime();
+
+      // Rotate DNA double helix
+      dnaGroup.rotation.y = elapsedTime * 0.25;
+      dnaGroup.rotation.x = Math.sin(elapsedTime * 0.1) * 0.15;
+
+      // Subtle starfield movements
+      starfield.rotation.y = elapsedTime * 0.02;
+
+      // Mouse movements parallax camera shift
+      camera.position.x += (mouseX - camera.position.x) * 0.05;
+      camera.position.y += (-mouseY - camera.position.y) * 0.05;
+      camera.lookAt(scene.position);
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+
 </body>
+
 </html>
